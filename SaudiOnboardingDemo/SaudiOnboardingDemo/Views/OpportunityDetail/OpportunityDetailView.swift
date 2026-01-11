@@ -131,7 +131,8 @@ struct OpportunityDetailView: View {
                         .lineLimit(2)
                         .minimumScaleFactor(0.8)
                         .fixedSize(horizontal: false, vertical: true)
-                    
+                        .padding(.leading, 40)
+
                     HStack(spacing: 6) {
                         Image(systemName: "mappin.circle.fill")
                             .font(.system(size: 13))
@@ -139,6 +140,7 @@ struct OpportunityDetailView: View {
                             .font(.system(size: 13, weight: .medium))
                             .lineLimit(1)
                             .minimumScaleFactor(0.8)
+                            .padding(.leading, 40) 
                     }
                     .foregroundColor(.white)
                     .shadow(color: Color.black.opacity(0.3), radius: 4, x: 0, y: 2)
