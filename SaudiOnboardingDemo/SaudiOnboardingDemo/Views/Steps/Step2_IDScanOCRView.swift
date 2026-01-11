@@ -21,22 +21,25 @@ struct Step2_IDScanOCRView: View {
 
     var body: some View {
         ScrollView {
-            VStack(spacing: AppConstants.spacing) {
+            VStack(spacing: ResponsiveLayout.baseSpacing) {
                 // Header
-                VStack(alignment: .leading, spacing: 8) {
+                VStack(alignment: .leading, spacing: ResponsiveLayout.smallSpacing) {
                     Text("تصوير الهوية والتحقق")
-                        .font(.title)
-                        .fontWeight(.bold)
+                        .font(.system(size: ResponsiveLayout.titleSize, weight: .bold))
                         .foregroundColor(AppColors.primary)
+                        .minimumScaleFactor(0.8)
+                        .lineLimit(1)
 
                     Text("قم بتصوير هويتك الوطنية والتحقق من وجهك")
-                        .font(.body)
+                        .font(.system(size: ResponsiveLayout.bodySize))
                         .foregroundColor(AppColors.textSecondary)
+                        .minimumScaleFactor(0.9)
+                        .lineLimit(2)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
 
                 // ID Section
-                VStack(spacing: AppConstants.spacing) {
+                VStack(spacing: ResponsiveLayout.baseSpacing) {
                     SectionHeader(title: "1️⃣ تصوير الهوية")
 
                     if registrationData.idImage == nil {
@@ -48,10 +51,10 @@ struct Step2_IDScanOCRView: View {
                         Image(uiImage: registrationData.idImage!)
                             .resizable()
                             .scaledToFit()
-                            .frame(height: 200)
-                            .cornerRadius(AppConstants.cornerRadius)
+                            .frame(height: ResponsiveLayout.idImageHeight)
+                            .cornerRadius(ResponsiveLayout.cornerRadius)
 
-                        HStack {
+                        HStack(spacing: ResponsiveLayout.baseSpacing) {
                             CustomButton(title: "إعادة تصوير") {
                                 registrationData.idImage = nil
                                 registrationData.ocrResponse = nil
@@ -69,17 +72,14 @@ struct Step2_IDScanOCRView: View {
 
                     if isProcessingOCR {
                         ProgressView("جاري استخراج البيانات...")
-                            .padding()
+                            .padding(ResponsiveLayout.smallSpacing)
                     }
                 }
-                .padding()
-                .background(AppColors.cardBackground)
-                .cornerRadius(AppConstants.cornerRadius)
-                .shadow(color: Color.black.opacity(0.05), radius: 5)
+                .responsiveCardStyle()
 
                 // OCR Results
                 if let ocrResponse = registrationData.ocrResponse {
-                    VStack(alignment: .leading, spacing: AppConstants.spacing) {
+                    VStack(alignment: .leading, spacing: ResponsiveLayout.baseSpacing) {
                         SectionHeader(title: "✅ نتائج استخراج البيانات")
 
                         ResultRow(label: "نوع الوثيقة", value: ocrResponse.documentType)
@@ -106,21 +106,20 @@ struct Step2_IDScanOCRView: View {
                             ResultRow(label: "مكان الميلاد", value: pob)
                         }
                     }
-                    .padding()
-                    .background(AppColors.cardBackground)
-                    .cornerRadius(AppConstants.cornerRadius)
-                    .shadow(color: Color.black.opacity(0.05), radius: 5)
+                    .responsiveCardStyle()
                 }
 
                 // Face Match Section
                 if registrationData.ocrResponse != nil {
-                    VStack(spacing: AppConstants.spacing) {
+                    VStack(spacing: ResponsiveLayout.baseSpacing) {
                         SectionHeader(title: "2️⃣ التحقق من الوجه")
 
                         if !registrationData.isFaceVerified {
                             Text("قم بالتقاط صورة سيلفي للتحقق من هويتك")
-                                .font(.caption)
+                                .font(.system(size: ResponsiveLayout.captionSize))
                                 .foregroundColor(AppColors.textSecondary)
+                                .minimumScaleFactor(0.9)
+                                .lineLimit(2)
 
                             CustomButton(title: "📸 التقاط صورة الوجه") {
                                 showFaceCamera = true
@@ -128,40 +127,40 @@ struct Step2_IDScanOCRView: View {
 
                             if isProcessingFace {
                                 ProgressView("جاري التحقق...")
-                                    .padding()
+                                    .padding(ResponsiveLayout.smallSpacing)
                             }
                         } else {
-                            HStack {
+                            HStack(spacing: ResponsiveLayout.smallSpacing) {
                                 Image(systemName: "checkmark.seal.fill")
                                     .foregroundColor(AppColors.success)
-                                    .font(.title)
+                                    .font(.system(size: ResponsiveLayout.titleSize))
 
-                                VStack(alignment: .leading) {
+                                VStack(alignment: .leading, spacing: ResponsiveLayout.smallSpacing) {
                                     Text("تم التحقق من الوجه بنجاح ✅")
-                                        .font(.body)
-                                        .fontWeight(.semibold)
+                                        .font(.system(size: ResponsiveLayout.bodySize, weight: .semibold))
                                         .foregroundColor(AppColors.success)
+                                        .minimumScaleFactor(0.9)
+                                        .lineLimit(2)
 
                                     Text(faceMatchResult)
-                                        .font(.caption)
+                                        .font(.system(size: ResponsiveLayout.captionSize))
                                         .foregroundColor(AppColors.textSecondary)
+                                        .minimumScaleFactor(0.9)
+                                        .lineLimit(2)
                                 }
                             }
-                            .padding()
+                            .padding(ResponsiveLayout.cardPadding)
                             .background(AppColors.success.opacity(0.1))
-                            .cornerRadius(AppConstants.cornerRadius)
+                            .cornerRadius(ResponsiveLayout.cornerRadius)
                         }
                     }
-                    .padding()
-                    .background(AppColors.cardBackground)
-                    .cornerRadius(AppConstants.cornerRadius)
-                    .shadow(color: Color.black.opacity(0.05), radius: 5)
+                    .responsiveCardStyle()
                 }
 
                 Spacer()
 
                 // Navigation Buttons
-                HStack(spacing: 16) {
+                HStack(spacing: ResponsiveLayout.baseSpacing) {
                     CustomButton(title: "رجوع", action: {
                         registrationData.currentStep = 1
                     }, isPrimary: false)
@@ -172,7 +171,8 @@ struct Step2_IDScanOCRView: View {
                     .disabled(!canProceed)
                 }
             }
-            .padding()
+            .responsivePadding()
+            .padding(.vertical, ResponsiveLayout.verticalPadding)
         }
         .background(AppColors.background.ignoresSafeArea())
         .sheet(isPresented: $showIdCamera) {
@@ -259,10 +259,11 @@ struct SectionHeader: View {
 
     var body: some View {
         Text(title)
-            .font(.headline)
-            .fontWeight(.bold)
+            .font(.system(size: ResponsiveLayout.subtitleSize, weight: .bold))
             .foregroundColor(AppColors.textPrimary)
             .frame(maxWidth: .infinity, alignment: .leading)
+            .minimumScaleFactor(0.8)
+            .lineLimit(1)
     }
 }
 
@@ -271,15 +272,19 @@ struct ResultRow: View {
     let value: String
 
     var body: some View {
-        HStack {
+        HStack(spacing: ResponsiveLayout.smallSpacing) {
             Text(label)
-                .font(.subheadline)
+                .font(.system(size: ResponsiveLayout.bodySize))
                 .foregroundColor(AppColors.textSecondary)
+                .minimumScaleFactor(0.8)
+                .lineLimit(1)
             Spacer()
             Text(value)
-                .font(.subheadline)
-                .fontWeight(.medium)
+                .font(.system(size: ResponsiveLayout.bodySize, weight: .medium))
                 .foregroundColor(AppColors.textPrimary)
+                .minimumScaleFactor(0.7)
+                .lineLimit(2)
+                .multilineTextAlignment(.trailing)
         }
     }
 }

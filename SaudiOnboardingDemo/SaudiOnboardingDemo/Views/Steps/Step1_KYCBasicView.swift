@@ -13,22 +13,25 @@ struct Step1_KYCBasicView: View {
 
     var body: some View {
         ScrollView {
-            VStack(spacing: AppConstants.spacing) {
+            VStack(spacing: ResponsiveLayout.baseSpacing) {
                 // Header
-                VStack(alignment: .leading, spacing: 8) {
+                VStack(alignment: .leading, spacing: ResponsiveLayout.smallSpacing) {
                     Text("بيانات KYC الأساسية")
-                        .font(.title)
-                        .fontWeight(.bold)
+                        .font(.system(size: ResponsiveLayout.titleSize, weight: .bold))
                         .foregroundColor(AppColors.primary)
+                        .minimumScaleFactor(0.8)
+                        .lineLimit(1)
 
                     Text("الرجاء إدخال معلوماتك الأساسية")
-                        .font(.body)
+                        .font(.system(size: ResponsiveLayout.bodySize))
                         .foregroundColor(AppColors.textSecondary)
+                        .minimumScaleFactor(0.9)
+                        .lineLimit(2)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
 
                 // Card
-                VStack(spacing: AppConstants.spacing) {
+                VStack(spacing: ResponsiveLayout.baseSpacing) {
                     CustomPicker(title: "الجنسية *", selection: $registrationData.nationality)
 
                     CustomPicker(title: "حالة الإقامة *", selection: $registrationData.residencyStatus)
@@ -52,15 +55,12 @@ struct Step1_KYCBasicView: View {
 
                     CustomPicker(title: "قطاع العمل *", selection: $registrationData.workSector)
                 }
-                .padding()
-                .background(AppColors.cardBackground)
-                .cornerRadius(AppConstants.cornerRadius)
-                .shadow(color: Color.black.opacity(0.05), radius: 5)
+                .responsiveCardStyle()
 
                 Spacer()
 
                 // Navigation Buttons
-                HStack(spacing: 16) {
+                HStack(spacing: ResponsiveLayout.baseSpacing) {
                     CustomButton(title: "رجوع", action: {
                         registrationData.currentStep = 0
                     }, isPrimary: false)
@@ -70,7 +70,8 @@ struct Step1_KYCBasicView: View {
                     }
                 }
             }
-            .padding()
+            .responsivePadding()
+            .padding(.vertical, ResponsiveLayout.verticalPadding)
         }
         .background(AppColors.background.ignoresSafeArea())
     }

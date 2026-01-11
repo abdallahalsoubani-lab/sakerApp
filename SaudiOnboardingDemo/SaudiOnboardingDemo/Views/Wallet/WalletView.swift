@@ -13,13 +13,10 @@ struct WalletView: View {
     // MARK: - Properties
     @StateObject private var viewModel = WalletViewModel()
     
-    // MARK: - Constants
-    private let gutter: CGFloat = 20
-    
     // MARK: - Body
     var body: some View {
         ScrollView(showsIndicators: false) {
-            VStack(spacing: 24) {
+            VStack(spacing: ResponsiveLayout.sectionSpacing) {
                 // Header
                 headerSection
                 
@@ -32,9 +29,9 @@ struct WalletView: View {
                 // Recent Transactions
                 transactionsSection
             }
-            .padding(.horizontal, gutter)
-            .padding(.top, 16)
-            .padding(.bottom, 24)
+            .responsivePadding()
+            .padding(.top, ResponsiveLayout.baseSpacing)
+            .padding(.bottom, ResponsiveLayout.sectionSpacing)
         }
         .background(Color(UIColor.systemGroupedBackground))
     }
@@ -43,52 +40,62 @@ struct WalletView: View {
     private var headerSection: some View {
         HStack {
             Text("Wallet")
-                .font(.system(size: 32, weight: .bold))
+                .font(.system(size: ResponsiveLayout.largeTitleSize, weight: .bold))
                 .foregroundColor(.primary)
+                .minimumScaleFactor(0.8)
+                .lineLimit(1)
             
             Spacer()
             
             Button(action: {}) {
                 Image(systemName: "clock.arrow.circlepath")
-                    .font(.system(size: 22))
+                    .font(.system(size: ResponsiveLayout.subtitleSize))
                     .foregroundColor(.primary)
-                    .frame(width: 44, height: 44)
+                    .frame(width: ResponsiveLayout.iconSize, height: ResponsiveLayout.iconSize)
             }
         }
     }
     
     // MARK: - Balance Card
     private var balanceCard: some View {
-        VStack(alignment: .leading, spacing: 20) {
+        VStack(alignment: .leading, spacing: ResponsiveLayout.baseSpacing) {
             // Total Balance
-            VStack(alignment: .leading, spacing: 8) {
+            VStack(alignment: .leading, spacing: ResponsiveLayout.smallSpacing) {
                 Text("Total Balance")
-                    .font(.system(size: 15, weight: .medium))
+                    .font(.system(size: ResponsiveLayout.bodySize, weight: .medium))
                     .foregroundColor(.white.opacity(0.7))
+                    .minimumScaleFactor(0.8)
+                    .lineLimit(1)
                 
-                HStack(alignment: .firstTextBaseline, spacing: 4) {
+                HStack(alignment: .firstTextBaseline, spacing: ResponsiveLayout.smallSpacing) {
                     Text(String(format: "%.2f", viewModel.totalBalance))
-                        .font(.system(size: 48, weight: .bold))
+                        .font(.system(size: ResponsiveLayout.largeTitleSize + 12, weight: .bold))
                         .foregroundColor(.white)
+                        .minimumScaleFactor(0.7)
+                        .lineLimit(1)
                     Text("SAR")
-                        .font(.system(size: 18, weight: .semibold))
+                        .font(.system(size: ResponsiveLayout.subtitleSize, weight: .semibold))
                         .foregroundColor(.white.opacity(0.7))
+                        .minimumScaleFactor(0.8)
+                        .lineLimit(1)
                 }
             }
             
             // Action Buttons
-            HStack(spacing: 12) {
+            HStack(spacing: ResponsiveLayout.baseSpacing) {
                 // Top Up Button
                 Button(action: viewModel.topUp) {
-                    HStack(spacing: 8) {
+                    HStack(spacing: ResponsiveLayout.smallSpacing) {
                         Image(systemName: "plus")
-                            .font(.system(size: 16, weight: .bold))
+                            .font(.system(size: ResponsiveLayout.bodySize, weight: .bold))
                         Text("Top Up")
-                            .font(.system(size: 16, weight: .bold))
+                            .font(.system(size: ResponsiveLayout.bodySize, weight: .bold))
+                            .minimumScaleFactor(0.8)
+                            .lineLimit(1)
                     }
                     .foregroundColor(.black)
                     .frame(maxWidth: .infinity)
-                    .padding(.vertical, 16)
+                    .padding(.vertical, ResponsiveLayout.baseSpacing)
                     .background(
                         LinearGradient(
                             gradient: Gradient(colors: [
@@ -99,26 +106,28 @@ struct WalletView: View {
                             endPoint: .bottomTrailing
                         )
                     )
-                    .cornerRadius(12)
+                    .cornerRadius(ResponsiveLayout.buttonCornerRadius)
                 }
                 
                 // Withdraw Button
                 Button(action: viewModel.withdraw) {
-                    HStack(spacing: 8) {
+                    HStack(spacing: ResponsiveLayout.smallSpacing) {
                         Image(systemName: "arrow.down.left")
-                            .font(.system(size: 16, weight: .bold))
+                            .font(.system(size: ResponsiveLayout.bodySize, weight: .bold))
                         Text("Withdraw")
-                            .font(.system(size: 16, weight: .bold))
+                            .font(.system(size: ResponsiveLayout.bodySize, weight: .bold))
+                            .minimumScaleFactor(0.8)
+                            .lineLimit(1)
                     }
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity)
-                    .padding(.vertical, 16)
+                    .padding(.vertical, ResponsiveLayout.baseSpacing)
                     .background(Color(white: 0.25))
-                    .cornerRadius(12)
+                    .cornerRadius(ResponsiveLayout.buttonCornerRadius)
                 }
             }
         }
-        .padding(24)
+        .padding(ResponsiveLayout.cardPadding)
         .background(
             LinearGradient(
                 gradient: Gradient(colors: [
@@ -135,47 +144,57 @@ struct WalletView: View {
     
     // MARK: - Stats Cards
     private var statsCards: some View {
-        HStack(spacing: 16) {
+        HStack(spacing: ResponsiveLayout.baseSpacing) {
             // Available to Invest
-            VStack(alignment: .leading, spacing: 8) {
+            VStack(alignment: .leading, spacing: ResponsiveLayout.smallSpacing) {
                 Text("Available to Invest")
-                    .font(.system(size: 13, weight: .medium))
+                    .font(.system(size: ResponsiveLayout.captionSize, weight: .medium))
                     .foregroundColor(.secondary)
+                    .minimumScaleFactor(0.7)
+                    .lineLimit(2)
                 
                 Text("\(String(format: "%.0f", viewModel.availableToInvest)) SAR")
-                    .font(.system(size: 22, weight: .bold))
+                    .font(.system(size: ResponsiveLayout.titleSize, weight: .bold))
                     .foregroundColor(.primary)
+                    .minimumScaleFactor(0.7)
+                    .lineLimit(1)
             }
-            .padding(20)
+            .padding(ResponsiveLayout.cardPadding)
             .frame(maxWidth: .infinity, alignment: .leading)
             .background(Color(UIColor.systemBackground))
-            .cornerRadius(16)
-            .shadow(color: Color.black.opacity(0.05), radius: 8, x: 0, y: 2)
+            .cornerRadius(ResponsiveLayout.largeCornerRadius)
+            .shadow(color: Color.black.opacity(ResponsiveLayout.shadowOpacity), radius: ResponsiveLayout.shadowRadius, x: 0, y: 2)
             
             // Total Invested
-            VStack(alignment: .leading, spacing: 8) {
+            VStack(alignment: .leading, spacing: ResponsiveLayout.smallSpacing) {
                 Text("Total Invested")
-                    .font(.system(size: 13, weight: .medium))
+                    .font(.system(size: ResponsiveLayout.captionSize, weight: .medium))
                     .foregroundColor(.secondary)
+                    .minimumScaleFactor(0.7)
+                    .lineLimit(2)
                 
                 Text("\(String(format: "%.0f", viewModel.totalInvested)) SAR")
-                    .font(.system(size: 22, weight: .bold))
+                    .font(.system(size: ResponsiveLayout.titleSize, weight: .bold))
                     .foregroundColor(.primary)
+                    .minimumScaleFactor(0.7)
+                    .lineLimit(1)
             }
-            .padding(20)
+            .padding(ResponsiveLayout.cardPadding)
             .frame(maxWidth: .infinity, alignment: .leading)
             .background(Color(UIColor.systemBackground))
-            .cornerRadius(16)
-            .shadow(color: Color.black.opacity(0.05), radius: 8, x: 0, y: 2)
+            .cornerRadius(ResponsiveLayout.largeCornerRadius)
+            .shadow(color: Color.black.opacity(ResponsiveLayout.shadowOpacity), radius: ResponsiveLayout.shadowRadius, x: 0, y: 2)
         }
     }
     
     // MARK: - Transactions Section
     private var transactionsSection: some View {
-        VStack(alignment: .leading, spacing: 16) {
+        VStack(alignment: .leading, spacing: ResponsiveLayout.baseSpacing) {
             Text("Recent Transactions")
-                .font(.system(size: 22, weight: .bold))
+                .font(.system(size: ResponsiveLayout.titleSize, weight: .bold))
                 .foregroundColor(.primary)
+                .minimumScaleFactor(0.8)
+                .lineLimit(1)
             
             VStack(spacing: 0) {
                 ForEach(viewModel.transactions) { transaction in

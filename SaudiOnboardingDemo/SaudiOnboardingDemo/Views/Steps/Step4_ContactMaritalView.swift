@@ -19,16 +19,17 @@ struct Step4_ContactMaritalView: View {
 
     var body: some View {
         ScrollView {
-            VStack(spacing: AppConstants.spacing) {
+            VStack(spacing: ResponsiveLayout.baseSpacing) {
                 // Header
                 Text("التواصل والحالة الاجتماعية")
-                    .font(.title)
-                    .fontWeight(.bold)
+                    .font(.system(size: ResponsiveLayout.titleSize, weight: .bold))
                     .foregroundColor(AppColors.primary)
                     .frame(maxWidth: .infinity, alignment: .leading)
+                    .minimumScaleFactor(0.8)
+                    .lineLimit(1)
 
                 // Card
-                VStack(spacing: AppConstants.spacing) {
+                VStack(spacing: ResponsiveLayout.baseSpacing) {
                     CustomTextField(
                         title: "البريد الإلكتروني *",
                         text: $registrationData.email,
@@ -57,10 +58,13 @@ struct Step4_ContactMaritalView: View {
                     }
 
                     Divider()
+                        .padding(.vertical, ResponsiveLayout.smallSpacing)
 
                     Text("بيانات الجواز (اختياري)")
-                        .font(.headline)
+                        .font(.system(size: ResponsiveLayout.subtitleSize, weight: .semibold))
                         .frame(maxWidth: .infinity, alignment: .leading)
+                        .minimumScaleFactor(0.8)
+                        .lineLimit(1)
 
                     CustomTextField(
                         title: "رقم الجواز",
@@ -90,15 +94,12 @@ struct Step4_ContactMaritalView: View {
                         displayedComponents: .date
                     )
                 }
-                .padding()
-                .background(AppColors.cardBackground)
-                .cornerRadius(AppConstants.cornerRadius)
-                .shadow(color: Color.black.opacity(0.05), radius: 5)
+                .responsiveCardStyle()
 
                 Spacer()
 
                 // Navigation
-                HStack(spacing: 16) {
+                HStack(spacing: ResponsiveLayout.baseSpacing) {
                     CustomButton(title: "رجوع", action: {
                         registrationData.currentStep = 3
                     }, isPrimary: false)
@@ -108,7 +109,8 @@ struct Step4_ContactMaritalView: View {
                     }
                 }
             }
-            .padding()
+            .responsivePadding()
+            .padding(.vertical, ResponsiveLayout.verticalPadding)
         }
         .background(AppColors.background.ignoresSafeArea())
     }

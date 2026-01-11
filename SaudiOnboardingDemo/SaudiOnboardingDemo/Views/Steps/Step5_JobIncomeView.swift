@@ -16,16 +16,17 @@ struct Step5_JobIncomeView: View {
 
     var body: some View {
         ScrollView {
-            VStack(spacing: AppConstants.spacing) {
+            VStack(spacing: ResponsiveLayout.baseSpacing) {
                 // Header
                 Text("الوظيفة والدخل")
-                    .font(.title)
-                    .fontWeight(.bold)
+                    .font(.system(size: ResponsiveLayout.titleSize, weight: .bold))
                     .foregroundColor(AppColors.primary)
                     .frame(maxWidth: .infinity, alignment: .leading)
+                    .minimumScaleFactor(0.8)
+                    .lineLimit(1)
 
                 // Card
-                VStack(spacing: AppConstants.spacing) {
+                VStack(spacing: ResponsiveLayout.baseSpacing) {
                     CustomPicker(title: "المهنة *", selection: $registrationData.profession)
 
                     CustomTextField(
@@ -81,15 +82,12 @@ struct Step5_JobIncomeView: View {
                         displayedComponents: .date
                     )
                 }
-                .padding()
-                .background(AppColors.cardBackground)
-                .cornerRadius(AppConstants.cornerRadius)
-                .shadow(color: Color.black.opacity(0.05), radius: 5)
+                .responsiveCardStyle()
 
                 Spacer()
 
                 // Navigation
-                HStack(spacing: 16) {
+                HStack(spacing: ResponsiveLayout.baseSpacing) {
                     CustomButton(title: "رجوع", action: {
                         registrationData.currentStep = 4
                     }, isPrimary: false)
@@ -99,7 +97,8 @@ struct Step5_JobIncomeView: View {
                     }
                 }
             }
-            .padding()
+            .responsivePadding()
+            .padding(.vertical, ResponsiveLayout.verticalPadding)
         }
         .background(AppColors.background.ignoresSafeArea())
         .sheet(isPresented: $showMap) {

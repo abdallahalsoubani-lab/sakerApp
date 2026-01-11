@@ -19,16 +19,17 @@ struct Step6_NationalAddressView: View {
 
     var body: some View {
         ScrollView {
-            VStack(spacing: AppConstants.spacing) {
+            VStack(spacing: ResponsiveLayout.baseSpacing) {
                 // Header
                 Text("العنوان الوطني السعودي")
-                    .font(.title)
-                    .fontWeight(.bold)
+                    .font(.system(size: ResponsiveLayout.titleSize, weight: .bold))
                     .foregroundColor(AppColors.primary)
                     .frame(maxWidth: .infinity, alignment: .leading)
+                    .minimumScaleFactor(0.8)
+                    .lineLimit(1)
 
                 // Card
-                VStack(spacing: AppConstants.spacing) {
+                VStack(spacing: ResponsiveLayout.baseSpacing) {
                     CustomTextField(
                         title: "رقم المبنى *",
                         text: $registrationData.buildingNumber,
@@ -104,15 +105,12 @@ struct Step6_NationalAddressView: View {
                         InfoBadge(text: "تم تحديد الموقع ✅")
                     }
                 }
-                .padding()
-                .background(AppColors.cardBackground)
-                .cornerRadius(AppConstants.cornerRadius)
-                .shadow(color: Color.black.opacity(0.05), radius: 5)
+                .responsiveCardStyle()
 
                 Spacer()
 
                 // Navigation
-                HStack(spacing: 16) {
+                HStack(spacing: ResponsiveLayout.baseSpacing) {
                     CustomButton(title: "رجوع", action: {
                         registrationData.currentStep = 5
                     }, isPrimary: false)
@@ -122,7 +120,8 @@ struct Step6_NationalAddressView: View {
                     }
                 }
             }
-            .padding()
+            .responsivePadding()
+            .padding(.vertical, ResponsiveLayout.verticalPadding)
         }
         .background(AppColors.background.ignoresSafeArea())
         .sheet(isPresented: $showMap) {

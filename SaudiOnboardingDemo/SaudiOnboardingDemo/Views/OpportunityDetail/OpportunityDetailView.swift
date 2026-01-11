@@ -41,7 +41,7 @@ struct OpportunityDetailView: View {
                             .frame(width: geometry.size.width)
                         
                         // Content Sections
-                        VStack(spacing: DesignConstants.sectionSpacing) {
+                        VStack(spacing: ResponsiveLayout.sectionSpacing) {
                             statsSection
                             fundingProgressSection
                             viewersSection
@@ -51,9 +51,9 @@ struct OpportunityDetailView: View {
                             documentsSection
                         }
                         .frame(maxWidth: geometry.size.width)
-                        .contentPadding()
-                        .padding(.top, DesignConstants.sectionSpacing)
-                        .padding(.bottom, 100)
+                        .responsivePadding()
+                        .padding(.top, ResponsiveLayout.sectionSpacing)
+                        .padding(.bottom, ResponsiveLayout.largeSpacing * 2)
                     }
                     .frame(maxWidth: geometry.size.width)
                 }
@@ -84,7 +84,7 @@ struct OpportunityDetailView: View {
             Image(opportunity.imageName)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .frame(height: 380)
+                .frame(height: ResponsiveLayout.heroImageHeight)
                 .clipped()
                 .overlay(
                     LinearGradient(
@@ -124,91 +124,105 @@ struct OpportunityDetailView: View {
             // Title and Location
             HStack {
                 VStack(alignment: .leading, spacing: 8) {
-                    Text(opportunity.title)
-                        .font(.system(size: 22, weight: .bold))
-                        .foregroundColor(.white)
-                        .shadow(color: Color.black.opacity(0.3), radius: 4, x: 0, y: 2)
-                        .lineLimit(2)
-                        .minimumScaleFactor(0.8)
-                        .fixedSize(horizontal: false, vertical: true)
-                        .padding(.leading, 40)
+                            Text(opportunity.title)
+                                .font(.system(size: ResponsiveLayout.titleSize, weight: .bold))
+                                .foregroundColor(.white)
+                                .shadow(color: Color.black.opacity(0.3), radius: 4, x: 0, y: 2)
+                                .lineLimit(2)
+                                .minimumScaleFactor(0.7)
+                                .fixedSize(horizontal: false, vertical: true)
+                                .padding(.leading, ResponsiveLayout.horizontalPadding)
 
-                    HStack(spacing: 6) {
+                    HStack(spacing: ResponsiveLayout.smallSpacing) {
                         Image(systemName: "mappin.circle.fill")
-                            .font(.system(size: 13))
+                            .font(.system(size: ResponsiveLayout.captionSize))
                         Text(opportunity.location)
-                            .font(.system(size: 13, weight: .medium))
+                            .font(.system(size: ResponsiveLayout.captionSize, weight: .medium))
                             .lineLimit(1)
-                            .minimumScaleFactor(0.8)
-                            .padding(.leading, 40) 
+                            .minimumScaleFactor(0.7)
+                            .padding(.leading, ResponsiveLayout.horizontalPadding)
                     }
                     .foregroundColor(.white)
                     .shadow(color: Color.black.opacity(0.3), radius: 4, x: 0, y: 2)
                 }
                 Spacer(minLength: 0)
             }
-            .padding(.horizontal, 40)
-            .padding(.bottom, 20)
+            .padding(.horizontal, ResponsiveLayout.horizontalPadding)
+            .padding(.bottom, ResponsiveLayout.baseSpacing)
         }
-        .frame(height: 380)
+        .frame(height: ResponsiveLayout.heroImageHeight)
     }
     
     // MARK: - Stats Section
     private var statsSection: some View {
         HStack(spacing: 0) {
-            VStack(spacing: 8) {
+            VStack(spacing: ResponsiveLayout.smallSpacing) {
                 Text("ANNUAL RETURN")
-                    .font(.system(size: 11, weight: .semibold))
+                    .font(.system(size: ResponsiveLayout.captionSize - 2, weight: .semibold))
                     .foregroundColor(.secondary)
                     .tracking(0.5)
+                    .minimumScaleFactor(0.7)
+                    .lineLimit(1)
                 
                 Text(String(format: "%.2f%%", opportunity.returnRate))
-                    .font(.system(size: 28, weight: .bold))
+                    .font(.system(size: ResponsiveLayout.titleSize + 2, weight: .bold))
                     .foregroundColor(.orange)
+                    .minimumScaleFactor(0.7)
+                    .lineLimit(1)
             }
             .frame(maxWidth: .infinity)
             
             Rectangle()
                 .fill(Color.gray.opacity(0.2))
-                .frame(width: 1, height: 50)
+                .frame(width: 1, height: ResponsiveLayout.iconSize)
             
-            VStack(spacing: 8) {
+            VStack(spacing: ResponsiveLayout.smallSpacing) {
                 Text("DISTRIBUTION")
-                    .font(.system(size: 11, weight: .semibold))
+                    .font(.system(size: ResponsiveLayout.captionSize - 2, weight: .semibold))
                     .foregroundColor(.secondary)
                     .tracking(0.5)
+                    .minimumScaleFactor(0.7)
+                    .lineLimit(1)
                 
                 Text("Monthly")
-                    .font(.system(size: 20, weight: .bold))
+                    .font(.system(size: ResponsiveLayout.subtitleSize, weight: .bold))
                     .foregroundColor(.primary)
+                    .minimumScaleFactor(0.7)
+                    .lineLimit(1)
             }
             .frame(maxWidth: .infinity)
             
             Rectangle()
                 .fill(Color.gray.opacity(0.2))
-                .frame(width: 1, height: 50)
+                .frame(width: 1, height: ResponsiveLayout.iconSize)
             
-            VStack(spacing: 8) {
+            VStack(spacing: ResponsiveLayout.smallSpacing) {
                 Text("TERM")
-                    .font(.system(size: 11, weight: .semibold))
+                    .font(.system(size: ResponsiveLayout.captionSize - 2, weight: .semibold))
                     .foregroundColor(.secondary)
                     .tracking(0.5)
+                    .minimumScaleFactor(0.7)
+                    .lineLimit(1)
                 
                 Text("5 Years")
-                    .font(.system(size: 20, weight: .bold))
+                    .font(.system(size: ResponsiveLayout.subtitleSize, weight: .bold))
                     .foregroundColor(.primary)
+                    .minimumScaleFactor(0.7)
+                    .lineLimit(1)
             }
             .frame(maxWidth: .infinity)
         }
-        .padding(.vertical, 20)
+        .padding(.vertical, ResponsiveLayout.baseSpacing)
     }
     
     // MARK: - Funding Progress Section
     private var fundingProgressSection: some View {
-        VStack(alignment: .leading, spacing: 16) {
+        VStack(alignment: .leading, spacing: ResponsiveLayout.baseSpacing) {
             HStack {
                 Text("Funding Progress")
-                    .font(.system(size: 20, weight: .bold))
+                    .font(.system(size: ResponsiveLayout.subtitleSize, weight: .bold))
+                    .minimumScaleFactor(0.8)
+                    .lineLimit(1)
                 
                 Spacer()
                 
@@ -505,62 +519,69 @@ struct OpportunityDetailView: View {
                 presentationMode.wrappedValue.dismiss()
             }) {
                 Image(systemName: "arrow.left")
-                    .font(.system(size: 18, weight: .semibold))
+                    .font(.system(size: ResponsiveLayout.subtitleSize, weight: .semibold))
                     .foregroundColor(.white)
-                    .frame(width: 40, height: 40)
+                    .frame(width: ResponsiveLayout.iconSize * 0.9, height: ResponsiveLayout.iconSize * 0.9)
                     .background(Color.black.opacity(0.4))
-                    .cornerRadius(20)
+                    .cornerRadius(ResponsiveLayout.iconSize * 0.45)
             }
             
             Spacer()
             
             Button(action: {}) {
                 Image(systemName: "square.and.arrow.up")
-                    .font(.system(size: 18, weight: .semibold))
+                    .font(.system(size: ResponsiveLayout.subtitleSize, weight: .semibold))
                     .foregroundColor(.white)
-                    .frame(width: 40, height: 40)
+                    .frame(width: ResponsiveLayout.iconSize * 0.9, height: ResponsiveLayout.iconSize * 0.9)
                     .background(Color.black.opacity(0.4))
-                    .cornerRadius(20)
+                    .cornerRadius(ResponsiveLayout.iconSize * 0.45)
             }
         }
-        .padding(.leading, 40)
-        .padding(.trailing, 40)
-        .padding(.top, 16)
+        .padding(.leading, ResponsiveLayout.horizontalPadding)
+        .padding(.trailing, ResponsiveLayout.horizontalPadding)
+        .padding(.top, ResponsiveLayout.baseSpacing)
     }
     
     // MARK: - Bottom Action Bar
     private var bottomActionBar: some View {
-        HStack(spacing: 12) {
-            VStack(alignment: .leading, spacing: 4) {
+        HStack(spacing: ResponsiveLayout.baseSpacing) {
+            VStack(alignment: .leading, spacing: ResponsiveLayout.smallSpacing) {
                 Text("MIN INVESTMENT")
-                    .font(.system(size: 11, weight: .semibold))
+                    .font(.system(size: ResponsiveLayout.captionSize - 2, weight: .semibold))
                     .foregroundColor(.secondary)
                     .tracking(0.5)
+                    .minimumScaleFactor(0.7)
+                    .lineLimit(1)
                 
-                HStack(spacing: 4) {
+                HStack(spacing: ResponsiveLayout.smallSpacing) {
                     Text("\(String(format: "%d", opportunity.minInvestment))")
-                        .font(.system(size: 20, weight: .bold))
+                        .font(.system(size: ResponsiveLayout.subtitleSize, weight: .bold))
                         .lineLimit(1)
+                        .minimumScaleFactor(0.7)
                     Text("SAR")
-                        .font(.system(size: 14, weight: .semibold))
+                        .font(.system(size: ResponsiveLayout.bodySize, weight: .semibold))
                         .foregroundColor(.secondary)
+                        .minimumScaleFactor(0.7)
+                        .lineLimit(1)
                 }
             }
             
-            Spacer(minLength: 8)
+            Spacer(minLength: ResponsiveLayout.smallSpacing)
             
             Button(action: {}) {
                 Text("Add to Cart")
-                    .font(.system(size: 16, weight: .bold))
+                    .font(.system(size: ResponsiveLayout.bodySize, weight: .bold))
                     .foregroundColor(.white)
-                    .padding(.horizontal, 40)
-                    .padding(.vertical, 16)
+                    .padding(.horizontal, ResponsiveLayout.horizontalPadding)
+                    .padding(.vertical, ResponsiveLayout.baseSpacing)
                     .background(Color.black)
-                    .cornerRadius(12)
+                    .cornerRadius(ResponsiveLayout.buttonCornerRadius)
+                    .minimumScaleFactor(0.8)
+                    .lineLimit(1)
             }
         }
-        .padding(.horizontal, DesignConstants.horizontalGutter)
-        .padding(.vertical, 16)
+        .padding(.horizontal, ResponsiveLayout.horizontalPadding)
+        .padding(.vertical, ResponsiveLayout.baseSpacing)
         .background(
             Color(UIColor.systemBackground)
                 .shadow(color: Color.black.opacity(0.08), radius: 12, x: 0, y: -4)

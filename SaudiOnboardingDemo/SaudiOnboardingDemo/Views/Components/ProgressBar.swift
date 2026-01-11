@@ -16,18 +16,21 @@ struct ProgressBar: View {
     }
 
     var body: some View {
-        VStack(spacing: 8) {
+        VStack(spacing: ResponsiveLayout.smallSpacing) {
             HStack {
                 Text("الخطوة \(currentStep) من \(totalSteps)")
-                    .font(.subheadline)
+                    .font(.system(size: ResponsiveLayout.bodySize))
                     .foregroundColor(AppColors.textSecondary)
+                    .minimumScaleFactor(0.8)
+                    .lineLimit(1)
 
                 Spacer()
 
                 Text("\(Int(progress * 100))%")
-                    .font(.subheadline)
-                    .fontWeight(.semibold)
+                    .font(.system(size: ResponsiveLayout.bodySize, weight: .semibold))
                     .foregroundColor(AppColors.primary)
+                    .minimumScaleFactor(0.8)
+                    .lineLimit(1)
             }
 
             GeometryReader { geometry in
@@ -35,8 +38,8 @@ struct ProgressBar: View {
                     // Background
                     Rectangle()
                         .fill(Color.gray.opacity(0.2))
-                        .frame(height: 8)
-                        .cornerRadius(4)
+                        .frame(height: ResponsiveLayout.smallSpacing)
+                        .cornerRadius(ResponsiveLayout.smallSpacing / 2)
 
                     // Progress
                     Rectangle()
@@ -47,16 +50,17 @@ struct ProgressBar: View {
                                 endPoint: .trailing
                             )
                         )
-                        .frame(width: geometry.size.width * progress, height: 8)
-                        .cornerRadius(4)
+                        .frame(width: geometry.size.width * progress, height: ResponsiveLayout.smallSpacing)
+                        .cornerRadius(ResponsiveLayout.smallSpacing / 2)
                         .animation(.spring(), value: progress)
                 }
             }
-            .frame(height: 8)
+            .frame(height: ResponsiveLayout.smallSpacing)
         }
-        .padding()
+        .responsivePadding()
+        .padding(.vertical, ResponsiveLayout.baseSpacing)
         .background(Color.white)
-        .shadow(color: Color.black.opacity(0.05), radius: 2, y: 2)
+        .shadow(color: Color.black.opacity(ResponsiveLayout.shadowOpacity), radius: 2, y: 2)
     }
 }
 

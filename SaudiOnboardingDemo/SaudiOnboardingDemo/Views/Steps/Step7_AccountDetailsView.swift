@@ -17,16 +17,17 @@ struct Step7_AccountDetailsView: View {
 
     var body: some View {
         ScrollView {
-            VStack(spacing: AppConstants.spacing) {
+            VStack(spacing: ResponsiveLayout.baseSpacing) {
                 // Header
                 Text("بيانات الحساب والتوصيل")
-                    .font(.title)
-                    .fontWeight(.bold)
+                    .font(.system(size: ResponsiveLayout.titleSize, weight: .bold))
                     .foregroundColor(AppColors.primary)
                     .frame(maxWidth: .infinity, alignment: .leading)
+                    .minimumScaleFactor(0.8)
+                    .lineLimit(1)
 
                 // Card
-                VStack(spacing: AppConstants.spacing) {
+                VStack(spacing: ResponsiveLayout.baseSpacing) {
                     CustomPicker(title: "نوع الحساب *", selection: $registrationData.accountType)
 
                     CustomPicker(title: "العملة *", selection: $registrationData.accountCurrency)
@@ -34,10 +35,13 @@ struct Step7_AccountDetailsView: View {
                     CustomPicker(title: "الفرع *", selection: $registrationData.branch)
 
                     Divider()
+                        .padding(.vertical, ResponsiveLayout.smallSpacing)
 
                     Text("توصيل بطاقة ATM")
-                        .font(.headline)
+                        .font(.system(size: ResponsiveLayout.subtitleSize, weight: .semibold))
                         .frame(maxWidth: .infinity, alignment: .leading)
+                        .minimumScaleFactor(0.8)
+                        .lineLimit(1)
 
                     CustomPicker(title: "توصيل إلى *", selection: $registrationData.deliveryLocation)
 
@@ -53,8 +57,10 @@ struct Step7_AccountDetailsView: View {
                     }
 
                     Divider()
+                        .padding(.vertical, ResponsiveLayout.smallSpacing)
 
                     Toggle("استخدام IBAN (اختياري)", isOn: $registrationData.useIban)
+                        .font(.system(size: ResponsiveLayout.bodySize))
                         .toggleStyle(SwitchToggleStyle(tint: AppColors.primary))
 
                     if registrationData.useIban {
@@ -69,15 +75,12 @@ struct Step7_AccountDetailsView: View {
                         }
                     }
                 }
-                .padding()
-                .background(AppColors.cardBackground)
-                .cornerRadius(AppConstants.cornerRadius)
-                .shadow(color: Color.black.opacity(0.05), radius: 5)
+                .responsiveCardStyle()
 
                 Spacer()
 
                 // Navigation
-                HStack(spacing: 16) {
+                HStack(spacing: ResponsiveLayout.baseSpacing) {
                     CustomButton(title: "رجوع", action: {
                         registrationData.currentStep = 6
                     }, isPrimary: false)
@@ -87,7 +90,8 @@ struct Step7_AccountDetailsView: View {
                     }
                 }
             }
-            .padding()
+            .responsivePadding()
+            .padding(.vertical, ResponsiveLayout.verticalPadding)
         }
         .background(AppColors.background.ignoresSafeArea())
     }
@@ -112,11 +116,13 @@ struct DeliveryAddressSection: View {
     @Binding var additionalNumber: String
 
     var body: some View {
-        VStack(spacing: AppConstants.spacing) {
+        VStack(spacing: ResponsiveLayout.baseSpacing) {
             Text("عنوان التوصيل")
-                .font(.headline)
+                .font(.system(size: ResponsiveLayout.subtitleSize, weight: .semibold))
                 .foregroundColor(AppColors.primary)
                 .frame(maxWidth: .infinity, alignment: .leading)
+                .minimumScaleFactor(0.8)
+                .lineLimit(1)
 
             CustomTextField(title: "رقم المبنى *", text: $buildingNumber, placeholder: "1234", keyboardType: .numberPad)
             CustomTextField(title: "اسم الشارع *", text: $streetName, placeholder: "شارع الملك فهد")

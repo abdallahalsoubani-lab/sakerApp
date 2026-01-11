@@ -14,22 +14,25 @@ struct Step3_NamesView: View {
 
     var body: some View {
         ScrollView {
-            VStack(spacing: AppConstants.spacing) {
+            VStack(spacing: ResponsiveLayout.baseSpacing) {
                 // Header
-                VStack(alignment: .leading, spacing: 8) {
+                VStack(alignment: .leading, spacing: ResponsiveLayout.smallSpacing) {
                     Text("بيانات الأسماء")
-                        .font(.title)
-                        .fontWeight(.bold)
+                        .font(.system(size: ResponsiveLayout.titleSize, weight: .bold))
                         .foregroundColor(AppColors.primary)
+                        .minimumScaleFactor(0.8)
+                        .lineLimit(1)
 
                     Text("تم تعبئة البيانات من الهوية تلقائياً")
-                        .font(.body)
+                        .font(.system(size: ResponsiveLayout.bodySize))
                         .foregroundColor(AppColors.textSecondary)
+                        .minimumScaleFactor(0.9)
+                        .lineLimit(2)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
 
                 // Card
-                VStack(spacing: AppConstants.spacing) {
+                VStack(spacing: ResponsiveLayout.baseSpacing) {
                     CustomTextField(
                         title: "الاسم الكامل بالعربي *",
                         text: $registrationData.fullNameArabic,
@@ -60,15 +63,12 @@ struct Step3_NamesView: View {
                         InfoBadge(text: "تم التعبئة من الهوية ✅")
                     }
                 }
-                .padding()
-                .background(AppColors.cardBackground)
-                .cornerRadius(AppConstants.cornerRadius)
-                .shadow(color: Color.black.opacity(0.05), radius: 5)
+                .responsiveCardStyle()
 
                 Spacer()
 
                 // Navigation
-                HStack(spacing: 16) {
+                HStack(spacing: ResponsiveLayout.baseSpacing) {
                     CustomButton(title: "رجوع", action: {
                         registrationData.currentStep = 2
                     }, isPrimary: false)
@@ -78,7 +78,8 @@ struct Step3_NamesView: View {
                     }
                 }
             }
-            .padding()
+            .responsivePadding()
+            .padding(.vertical, ResponsiveLayout.verticalPadding)
         }
         .background(AppColors.background.ignoresSafeArea())
     }
@@ -104,16 +105,19 @@ struct InfoBadge: View {
     let text: String
 
     var body: some View {
-        HStack {
+        HStack(spacing: ResponsiveLayout.smallSpacing) {
             Image(systemName: "info.circle.fill")
+                .font(.system(size: ResponsiveLayout.captionSize))
             Text(text)
-                .font(.caption)
+                .font(.system(size: ResponsiveLayout.captionSize))
+                .minimumScaleFactor(0.8)
+                .lineLimit(1)
         }
         .foregroundColor(AppColors.success)
-        .padding(.horizontal, 12)
-        .padding(.vertical, 6)
+        .padding(.horizontal, ResponsiveLayout.cardPadding)
+        .padding(.vertical, ResponsiveLayout.smallSpacing)
         .background(AppColors.success.opacity(0.1))
-        .cornerRadius(8)
+        .cornerRadius(ResponsiveLayout.cornerRadius)
     }
 }
 

@@ -16,15 +16,16 @@ struct CustomButton: View {
     var body: some View {
         Button(action: action) {
             Text(title)
-                .font(.body)
-                .fontWeight(.semibold)
+                .font(.system(size: ResponsiveLayout.bodySize, weight: .semibold))
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity)
-                .frame(height: 50)
+                .frame(height: ResponsiveLayout.buttonHeight)
                 .background(
                     isDisabled ? Color.gray : (isPrimary ? AppColors.primary : AppColors.secondary)
                 )
-                .cornerRadius(AppConstants.cornerRadius)
+                .cornerRadius(ResponsiveLayout.buttonCornerRadius)
+                .minimumScaleFactor(0.8)
+                .lineLimit(1)
         }
         .disabled(isDisabled)
     }

@@ -16,22 +16,25 @@ struct Step8_LoginCredentialsView: View {
 
     var body: some View {
         ScrollView {
-            VStack(spacing: AppConstants.spacing) {
+            VStack(spacing: ResponsiveLayout.baseSpacing) {
                 // Header
-                VStack(alignment: .leading, spacing: 8) {
+                VStack(alignment: .leading, spacing: ResponsiveLayout.smallSpacing) {
                     Text("بيانات الدخول")
-                        .font(.title)
-                        .fontWeight(.bold)
+                        .font(.system(size: ResponsiveLayout.titleSize, weight: .bold))
                         .foregroundColor(AppColors.primary)
+                        .minimumScaleFactor(0.8)
+                        .lineLimit(1)
 
                     Text("آخر خطوة! قم بإنشاء بيانات تسجيل الدخول")
-                        .font(.body)
+                        .font(.system(size: ResponsiveLayout.bodySize))
                         .foregroundColor(AppColors.textSecondary)
+                        .minimumScaleFactor(0.9)
+                        .lineLimit(2)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
 
                 // Card
-                VStack(spacing: AppConstants.spacing) {
+                VStack(spacing: ResponsiveLayout.baseSpacing) {
                     CustomTextField(
                         title: "اسم المستخدم *",
                         text: $registrationData.username,
@@ -43,9 +46,11 @@ struct Step8_LoginCredentialsView: View {
                     }
 
                     Text("6-20 حرف/رقم، يمكن استخدام . و _")
-                        .font(.caption)
+                        .font(.system(size: ResponsiveLayout.captionSize))
                         .foregroundColor(AppColors.textSecondary)
                         .frame(maxWidth: .infinity, alignment: .leading)
+                        .minimumScaleFactor(0.8)
+                        .lineLimit(2)
 
                     CustomSecureField(
                         title: "كلمة المرور *",
@@ -58,9 +63,11 @@ struct Step8_LoginCredentialsView: View {
                     }
 
                     Text("8 أحرف على الأقل، حرف كبير، حرف صغير، رقم، ورمز خاص")
-                        .font(.caption)
+                        .font(.system(size: ResponsiveLayout.captionSize))
                         .foregroundColor(AppColors.textSecondary)
                         .frame(maxWidth: .infinity, alignment: .leading)
+                        .minimumScaleFactor(0.8)
+                        .lineLimit(2)
 
                     CustomSecureField(
                         title: "تأكيد كلمة المرور *",
@@ -72,20 +79,17 @@ struct Step8_LoginCredentialsView: View {
                         confirmPasswordError = nil
                     }
                 }
-                .padding()
-                .background(AppColors.cardBackground)
-                .cornerRadius(AppConstants.cornerRadius)
-                .shadow(color: Color.black.opacity(0.05), radius: 5)
+                .responsiveCardStyle()
 
                 Spacer()
 
                 if isSubmitting {
                     ProgressView("جاري إرسال البيانات...")
-                        .padding()
+                        .padding(ResponsiveLayout.baseSpacing)
                 }
 
                 // Navigation
-                HStack(spacing: 16) {
+                HStack(spacing: ResponsiveLayout.baseSpacing) {
                     CustomButton(title: "رجوع", action: {
                         registrationData.currentStep = 7
                     }, isPrimary: false)
@@ -96,7 +100,8 @@ struct Step8_LoginCredentialsView: View {
                     .disabled(isSubmitting)
                 }
             }
-            .padding()
+            .responsivePadding()
+            .padding(.vertical, ResponsiveLayout.verticalPadding)
         }
         .background(AppColors.background.ignoresSafeArea())
     }

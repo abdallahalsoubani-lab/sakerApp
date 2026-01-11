@@ -15,23 +15,26 @@ struct Step0_PhoneOTPView: View {
 
     var body: some View {
         ScrollView {
-            VStack(spacing: AppConstants.spacing) {
+            VStack(spacing: ResponsiveLayout.baseSpacing) {
                 // Header
-                VStack(alignment: .leading, spacing: 8) {
+                VStack(alignment: .leading, spacing: ResponsiveLayout.smallSpacing) {
                     Text("مرحباً بك")
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
+                        .font(.system(size: ResponsiveLayout.largeTitleSize, weight: .bold))
                         .foregroundColor(AppColors.primary)
+                        .minimumScaleFactor(0.8)
+                        .lineLimit(1)
 
                     Text("الرجاء إدخال رقم الجوال للمتابعة")
-                        .font(.body)
+                        .font(.system(size: ResponsiveLayout.bodySize))
                         .foregroundColor(AppColors.textSecondary)
+                        .minimumScaleFactor(0.9)
+                        .lineLimit(2)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.bottom)
+                .padding(.bottom, ResponsiveLayout.smallSpacing)
 
                 // Card
-                VStack(spacing: AppConstants.spacing) {
+                VStack(spacing: ResponsiveLayout.baseSpacing) {
                     // Phone Number
                     CustomTextField(
                         title: "رقم الجوال السعودي *",
@@ -51,13 +54,16 @@ struct Step0_PhoneOTPView: View {
                         }
                     } else {
                         // OTP Section
-                        VStack(alignment: .leading, spacing: AppConstants.spacing) {
-                            HStack {
+                        VStack(alignment: .leading, spacing: ResponsiveLayout.baseSpacing) {
+                            HStack(spacing: ResponsiveLayout.smallSpacing) {
                                 Image(systemName: "checkmark.circle.fill")
                                     .foregroundColor(AppColors.success)
+                                    .font(.system(size: ResponsiveLayout.bodySize))
                                 Text("تم إرسال رمز التحقق إلى \(registrationData.phoneNumber)")
-                                    .font(.caption)
+                                    .font(.system(size: ResponsiveLayout.captionSize))
                                     .foregroundColor(AppColors.textSecondary)
+                                    .minimumScaleFactor(0.8)
+                                    .lineLimit(2)
                             }
                             .frame(maxWidth: .infinity, alignment: .leading)
 
@@ -73,25 +79,21 @@ struct Step0_PhoneOTPView: View {
                             }
 
                             Text("رمز التحقق للديمو: \(registrationData.generatedOtp)")
-                                .font(.caption)
+                                .font(.system(size: ResponsiveLayout.captionSize, weight: .semibold))
                                 .foregroundColor(AppColors.primary)
-                                .fontWeight(.semibold)
                                 .frame(maxWidth: .infinity, alignment: .leading)
 
                             Button("إعادة إرسال الرمز") {
                                 sendOTP()
                             }
-                            .font(.caption)
+                            .font(.system(size: ResponsiveLayout.captionSize))
                             .foregroundColor(AppColors.secondary)
                             .frame(maxWidth: .infinity, alignment: .leading)
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
                     }
                 }
-                .padding()
-                .background(AppColors.cardBackground)
-                .cornerRadius(AppConstants.cornerRadius)
-                .shadow(color: Color.black.opacity(0.05), radius: 5)
+                .responsiveCardStyle()
 
                 Spacer()
 
@@ -101,7 +103,8 @@ struct Step0_PhoneOTPView: View {
                 }
                 .disabled(!otpSent)
             }
-            .padding()
+            .responsivePadding()
+            .padding(.vertical, ResponsiveLayout.verticalPadding)
         }
         .background(AppColors.background.ignoresSafeArea())
     }

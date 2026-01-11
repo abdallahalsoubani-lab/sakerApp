@@ -14,9 +14,6 @@ struct OpportunitiesView: View {
     @StateObject private var viewModel = OpportunitiesViewModel()
     @State private var selectedTab: Int = 0
     
-    // MARK: - Constants
-    private let gutter: CGFloat = 20
-    
     // MARK: - Body
     var body: some View {
         NavigationView {
@@ -45,14 +42,18 @@ struct OpportunitiesView: View {
     // MARK: - Header Section
     private var headerSection: some View {
         HStack {
-            VStack(alignment: .leading, spacing: 4) {
+            VStack(alignment: .leading, spacing: ResponsiveLayout.smallSpacing) {
                 Text("Opportunities")
-                    .font(.system(size: 32, weight: .bold))
+                    .font(.system(size: ResponsiveLayout.largeTitleSize, weight: .bold))
                     .foregroundColor(.primary)
+                    .minimumScaleFactor(0.8)
+                    .lineLimit(1)
                 
                 Text("Explore vetted real estate assets")
-                    .font(.system(size: 15))
+                    .font(.system(size: ResponsiveLayout.bodySize))
                     .foregroundColor(.secondary)
+                    .minimumScaleFactor(0.8)
+                    .lineLimit(1)
             }
             
             Spacer()
@@ -61,40 +62,40 @@ struct OpportunitiesView: View {
                 // Filter action
             }) {
                 Image(systemName: "slider.horizontal.3")
-                    .font(.system(size: 20))
+                    .font(.system(size: ResponsiveLayout.subtitleSize))
                     .foregroundColor(.primary)
-                    .frame(width: 44, height: 44)
+                    .frame(width: ResponsiveLayout.iconSize, height: ResponsiveLayout.iconSize)
             }
         }
-        .padding(.horizontal, gutter)
-        .padding(.top, 16)
-        .padding(.bottom, 12)
+        .responsivePadding()
+        .padding(.top, ResponsiveLayout.baseSpacing)
+        .padding(.bottom, ResponsiveLayout.smallSpacing)
         .background(Color(UIColor.systemBackground))
     }
     
     // MARK: - Search Bar Section
     private var searchBarSection: some View {
-        HStack(spacing: 12) {
+        HStack(spacing: ResponsiveLayout.baseSpacing) {
             Image(systemName: "magnifyingglass")
                 .foregroundColor(.gray)
-                .font(.system(size: 18))
+                .font(.system(size: ResponsiveLayout.subtitleSize))
             
             TextField("Search location or asset...", text: $viewModel.searchText)
-                .font(.system(size: 16))
+                .font(.system(size: ResponsiveLayout.bodySize))
         }
-        .padding(.horizontal, 16)
-        .padding(.vertical, 12)
+        .padding(.horizontal, ResponsiveLayout.baseSpacing)
+        .padding(.vertical, ResponsiveLayout.baseSpacing)
         .background(Color(UIColor.systemGray6))
-        .cornerRadius(12)
-        .padding(.horizontal, gutter)
-        .padding(.bottom, 16)
+        .cornerRadius(ResponsiveLayout.buttonCornerRadius)
+        .responsivePadding()
+        .padding(.bottom, ResponsiveLayout.baseSpacing)
         .background(Color(UIColor.systemBackground))
     }
     
     // MARK: - Filter Section
     private var filterSection: some View {
         ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 12) {
+            HStack(spacing: ResponsiveLayout.baseSpacing) {
                 ForEach(PropertyType.allCases) { type in
                     FilterButton(
                         title: type.displayName,
@@ -106,16 +107,16 @@ struct OpportunitiesView: View {
                     }
                 }
             }
-            .padding(.horizontal, gutter)
+            .responsivePadding()
         }
-        .padding(.vertical, 16)
+        .padding(.vertical, ResponsiveLayout.baseSpacing)
         .background(Color(UIColor.systemBackground))
     }
     
     // MARK: - Opportunities List Section
     private var opportunitiesListSection: some View {
         ScrollView(showsIndicators: false) {
-            LazyVStack(spacing: 20) {
+            LazyVStack(spacing: ResponsiveLayout.sectionSpacing) {
                 ForEach(viewModel.filteredOpportunities) { opportunity in
                     NavigationLink(destination: OpportunityDetailView(opportunity: opportunity, hideTabBar: .constant(true))) {
                         OpportunityCard(opportunity: opportunity)
@@ -123,8 +124,8 @@ struct OpportunitiesView: View {
                     .buttonStyle(.plain)
                 }
             }
-            .padding(.horizontal, gutter)
-            .padding(.vertical, 20)
+            .responsivePadding()
+            .padding(.vertical, ResponsiveLayout.baseSpacing)
         }
     }
 }
@@ -138,12 +139,14 @@ struct FilterButton: View {
     var body: some View {
         Button(action: action) {
             Text(title)
-                .font(.system(size: 15, weight: isSelected ? .semibold : .regular))
+                .font(.system(size: ResponsiveLayout.bodySize, weight: isSelected ? .semibold : .regular))
                 .foregroundColor(isSelected ? .white : .primary)
-                .padding(.horizontal, 20)
-                .padding(.vertical, 10)
+                .padding(.horizontal, ResponsiveLayout.baseSpacing)
+                .padding(.vertical, ResponsiveLayout.smallSpacing)
                 .background(isSelected ? Color.black : Color(UIColor.systemGray6))
-                .cornerRadius(20)
+                .cornerRadius(ResponsiveLayout.largeCornerRadius)
+                .minimumScaleFactor(0.8)
+                .lineLimit(1)
         }
     }
 }

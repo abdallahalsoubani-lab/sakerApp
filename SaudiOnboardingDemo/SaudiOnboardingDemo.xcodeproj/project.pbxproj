@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B2F862B2F14377A00AA55E3 /* ResponsiveLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B2F862A2F14377A00AA55E3 /* ResponsiveLayout.swift */; };
 		AA0001 /* SaudiOnboardingDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0002 /* SaudiOnboardingDemoApp.swift */; };
 		AA0003 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0004 /* ContentView.swift */; };
 		AA0005 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA0006 /* Assets.xcassets */; };
@@ -38,17 +39,18 @@
 		AA0DD197 /* OpportunityDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1F8BEE /* OpportunityDetailView.swift */; };
 		AA8495C4 /* BottomNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABA3417 /* BottomNavigationBar.swift */; };
 		AA855EA9 /* DesignConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA61B0B3 /* DesignConstants.swift */; };
+		AA89F721 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		AA9C2F92 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		AABE403C /* OpportunitiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA588559 /* OpportunitiesView.swift */; };
 		AAC785E2 /* InvestmentOpportunity.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA89996C /* InvestmentOpportunity.swift */; };
 		AAD3D33E /* OpportunitiesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAECC457 /* OpportunitiesViewModel.swift */; };
 		AAD92ECA /* TimelineItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0ECE19 /* TimelineItem.swift */; };
 		AADBCB35 /* OpportunityCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA90AC89 /* OpportunityCard.swift */; };
-		AA89F721 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB021F1 /* Transaction.swift */; };
-		AADE9B28 /* WalletViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE045545 /* WalletViewModel.swift */; };
-		AA9C2F92 /* WalletView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC011863 /* WalletView.swift */; };
+		AADE9B28 /* (null) in Sources */ = {isa = PBXBuildFile; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1B2F862A2F14377A00AA55E3 /* ResponsiveLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponsiveLayout.swift; sourceTree = "<group>"; };
 		AA0002 /* SaudiOnboardingDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaudiOnboardingDemoApp.swift; sourceTree = "<group>"; };
 		AA0004 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		AA0006 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -87,9 +89,6 @@
 		AA90AC89 /* OpportunityCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpportunityCard.swift; sourceTree = "<group>"; };
 		AABA3417 /* BottomNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomNavigationBar.swift; sourceTree = "<group>"; };
 		AAECC457 /* OpportunitiesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpportunitiesViewModel.swift; sourceTree = "<group>"; };
-		AA021F1B /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
-		AAE45545 /* WalletViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewModel.swift; sourceTree = "<group>"; };
-		AA011863 /* WalletView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,7 +142,6 @@
 				AA0018 /* SaudiIdOcrResponse.swift */,
 				AA89996C /* InvestmentOpportunity.swift */,
 				AA0ECE19 /* TimelineItem.swift */,
-				AAB021F1 /* Transaction.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -161,6 +159,7 @@
 		AA0065 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				1B2F862A2F14377A00AA55E3 /* ResponsiveLayout.swift */,
 				AA0010 /* Constants.swift */,
 				AA0012 /* RegexPatterns.swift */,
 				AA61B0B3 /* DesignConstants.swift */,
@@ -233,9 +232,15 @@
 			isa = PBXGroup;
 			children = (
 				AAECC457 /* OpportunitiesViewModel.swift */,
-				AAE045545 /* WalletViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		AAA0EA14 /* Wallet */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Wallet;
 			sourceTree = "<group>";
 		};
 		AAF1D7DD /* OpportunityDetail */ = {
@@ -244,14 +249,6 @@
 				AA1F8BEE /* OpportunityDetailView.swift */,
 			);
 			path = OpportunityDetail;
-			sourceTree = "<group>";
-		};
-		AAA0EA14 /* Wallet */ = {
-			isa = PBXGroup;
-			children = (
-				AAC011863 /* WalletView.swift */,
-			);
-			path = Wallet;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -355,12 +352,13 @@
 				AABE403C /* OpportunitiesView.swift in Sources */,
 				AADBCB35 /* OpportunityCard.swift in Sources */,
 				AA8495C4 /* BottomNavigationBar.swift in Sources */,
+				1B2F862B2F14377A00AA55E3 /* ResponsiveLayout.swift in Sources */,
 				AAD92ECA /* TimelineItem.swift in Sources */,
 				AA0DD197 /* OpportunityDetailView.swift in Sources */,
 				AA855EA9 /* DesignConstants.swift in Sources */,
-				AA89F721 /* Transaction.swift in Sources */,
-				AADE9B28 /* WalletViewModel.swift in Sources */,
-				AA9C2F92 /* WalletView.swift in Sources */,
+				AA89F721 /* (null) in Sources */,
+				AADE9B28 /* (null) in Sources */,
+				AA9C2F92 /* (null) in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -17,21 +17,23 @@ struct CustomTextField: View {
     @FocusState private var isFocused: Bool
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: ResponsiveLayout.smallSpacing) {
             Text(title)
-                .font(.subheadline)
-                .fontWeight(.medium)
+                .font(.system(size: ResponsiveLayout.bodySize, weight: .medium))
                 .foregroundColor(AppColors.textPrimary)
                 .frame(maxWidth: .infinity, alignment: .leading)
+                .minimumScaleFactor(0.8)
+                .lineLimit(1)
 
             TextField(placeholder, text: $text)
                 .keyboardType(keyboardType)
                 .textFieldStyle(.plain)
-                .padding()
+                .font(.system(size: ResponsiveLayout.bodySize))
+                .padding(ResponsiveLayout.baseSpacing)
                 .background(isDisabled ? Color.gray.opacity(0.1) : AppColors.background)
-                .cornerRadius(8)
+                .cornerRadius(ResponsiveLayout.cornerRadius)
                 .overlay(
-                    RoundedRectangle(cornerRadius: 8)
+                    RoundedRectangle(cornerRadius: ResponsiveLayout.cornerRadius)
                         .stroke(errorMessage != nil ? AppColors.error : Color.gray.opacity(0.3), lineWidth: 1)
                 )
                 .disabled(isDisabled)
@@ -42,14 +44,17 @@ struct CustomTextField: View {
                         Button("Done") {
                             hideKeyboard()
                         }
+                        .font(.system(size: ResponsiveLayout.bodySize))
                         .foregroundColor(AppColors.primary)
                     }
                 }
 
             if let errorMessage = errorMessage {
                 Text(errorMessage)
-                    .font(.caption)
+                    .font(.system(size: ResponsiveLayout.captionSize))
                     .foregroundColor(AppColors.error)
+                    .minimumScaleFactor(0.8)
+                    .lineLimit(2)
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -69,20 +74,22 @@ struct CustomSecureField: View {
     @FocusState private var isFocused: Bool
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: ResponsiveLayout.smallSpacing) {
             Text(title)
-                .font(.subheadline)
-                .fontWeight(.medium)
+                .font(.system(size: ResponsiveLayout.bodySize, weight: .medium))
                 .foregroundColor(AppColors.textPrimary)
                 .frame(maxWidth: .infinity, alignment: .leading)
+                .minimumScaleFactor(0.8)
+                .lineLimit(1)
 
             SecureField(placeholder, text: $text)
                 .textFieldStyle(.plain)
-                .padding()
+                .font(.system(size: ResponsiveLayout.bodySize))
+                .padding(ResponsiveLayout.baseSpacing)
                 .background(AppColors.background)
-                .cornerRadius(8)
+                .cornerRadius(ResponsiveLayout.cornerRadius)
                 .overlay(
-                    RoundedRectangle(cornerRadius: 8)
+                    RoundedRectangle(cornerRadius: ResponsiveLayout.cornerRadius)
                         .stroke(errorMessage != nil ? AppColors.error : Color.gray.opacity(0.3), lineWidth: 1)
                 )
                 .focused($isFocused)
@@ -92,14 +99,17 @@ struct CustomSecureField: View {
                         Button("Done") {
                             hideKeyboard()
                         }
+                        .font(.system(size: ResponsiveLayout.bodySize))
                         .foregroundColor(AppColors.primary)
                     }
                 }
 
             if let errorMessage = errorMessage {
                 Text(errorMessage)
-                    .font(.caption)
+                    .font(.system(size: ResponsiveLayout.captionSize))
                     .foregroundColor(AppColors.error)
+                    .minimumScaleFactor(0.8)
+                    .lineLimit(2)
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -118,28 +128,31 @@ struct CustomDatePicker: View {
     var errorMessage: String? = nil
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: ResponsiveLayout.smallSpacing) {
             Text(title)
-                .font(.subheadline)
-                .fontWeight(.medium)
+                .font(.system(size: ResponsiveLayout.bodySize, weight: .medium))
                 .foregroundColor(AppColors.textPrimary)
                 .frame(maxWidth: .infinity, alignment: .leading)
+                .minimumScaleFactor(0.8)
+                .lineLimit(1)
 
             DatePicker("", selection: $selection, displayedComponents: displayedComponents)
                 .datePickerStyle(.compact)
                 .labelsHidden()
-                .padding()
+                .padding(ResponsiveLayout.baseSpacing)
                 .background(AppColors.background)
-                .cornerRadius(8)
+                .cornerRadius(ResponsiveLayout.cornerRadius)
                 .overlay(
-                    RoundedRectangle(cornerRadius: 8)
+                    RoundedRectangle(cornerRadius: ResponsiveLayout.cornerRadius)
                         .stroke(errorMessage != nil ? AppColors.error : Color.gray.opacity(0.3), lineWidth: 1)
                 )
 
             if let errorMessage = errorMessage {
                 Text(errorMessage)
-                    .font(.caption)
+                    .font(.system(size: ResponsiveLayout.captionSize))
                     .foregroundColor(AppColors.error)
+                    .minimumScaleFactor(0.8)
+                    .lineLimit(2)
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)

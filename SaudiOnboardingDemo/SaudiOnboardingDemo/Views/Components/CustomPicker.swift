@@ -13,12 +13,13 @@ struct CustomPicker<T: RawRepresentable & CaseIterable & Hashable>: View where T
     var errorMessage: String? = nil
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: ResponsiveLayout.smallSpacing) {
             Text(title)
-                .font(.subheadline)
-                .fontWeight(.medium)
+                .font(.system(size: ResponsiveLayout.bodySize, weight: .medium))
                 .foregroundColor(AppColors.textPrimary)
                 .frame(maxWidth: .infinity, alignment: .leading)
+                .minimumScaleFactor(0.8)
+                .lineLimit(1)
 
             Menu {
                 ForEach(Array(T.allCases), id: \.self) { option in
@@ -27,8 +28,10 @@ struct CustomPicker<T: RawRepresentable & CaseIterable & Hashable>: View where T
                     }) {
                         HStack {
                             Text(option.rawValue)
+                                .font(.system(size: ResponsiveLayout.bodySize))
                             if selection == option {
                                 Image(systemName: "checkmark")
+                                    .font(.system(size: ResponsiveLayout.bodySize))
                             }
                         }
                     }
@@ -36,25 +39,30 @@ struct CustomPicker<T: RawRepresentable & CaseIterable & Hashable>: View where T
             } label: {
                 HStack {
                     Text(selection.rawValue)
+                        .font(.system(size: ResponsiveLayout.bodySize))
                         .foregroundColor(AppColors.textPrimary)
+                        .minimumScaleFactor(0.8)
+                        .lineLimit(1)
                     Spacer()
                     Image(systemName: "chevron.down")
                         .foregroundColor(AppColors.textSecondary)
-                        .font(.system(size: 12))
+                        .font(.system(size: ResponsiveLayout.captionSize))
                 }
-                .padding()
+                .padding(ResponsiveLayout.baseSpacing)
                 .background(AppColors.background)
-                .cornerRadius(8)
+                .cornerRadius(ResponsiveLayout.cornerRadius)
                 .overlay(
-                    RoundedRectangle(cornerRadius: 8)
+                    RoundedRectangle(cornerRadius: ResponsiveLayout.cornerRadius)
                         .stroke(errorMessage != nil ? AppColors.error : Color.gray.opacity(0.3), lineWidth: 1)
                 )
             }
 
             if let errorMessage = errorMessage {
                 Text(errorMessage)
-                    .font(.caption)
+                    .font(.system(size: ResponsiveLayout.captionSize))
                     .foregroundColor(AppColors.error)
+                    .minimumScaleFactor(0.8)
+                    .lineLimit(2)
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
