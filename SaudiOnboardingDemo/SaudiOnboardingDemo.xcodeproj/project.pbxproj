@@ -1,0 +1,575 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AA0001 /* SaudiOnboardingDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0002 /* SaudiOnboardingDemoApp.swift */; };
+		AA0003 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0004 /* ContentView.swift */; };
+		AA0005 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA0006 /* Assets.xcassets */; };
+		AA0007 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA0008 /* Preview Assets.xcassets */; };
+		AA0009 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0010 /* Constants.swift */; };
+		AA0011 /* RegexPatterns.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0012 /* RegexPatterns.swift */; };
+		AA0013 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0014 /* Enums.swift */; };
+		AA0015 /* RegistrationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0016 /* RegistrationData.swift */; };
+		AA0017 /* SaudiIdOcrResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0018 /* SaudiIdOcrResponse.swift */; };
+		AA0019 /* OcrService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0020 /* OcrService.swift */; };
+		AA0021 /* FaceMatchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0022 /* FaceMatchService.swift */; };
+		AA0023 /* ValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0024 /* ValidationService.swift */; };
+		AA0025 /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0026 /* ProgressBar.swift */; };
+		AA0027 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0028 /* CustomButton.swift */; };
+		AA0029 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0030 /* CustomTextField.swift */; };
+		AA0031 /* CustomPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0032 /* CustomPicker.swift */; };
+		AA0033 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0034 /* ImagePicker.swift */; };
+		AA0035 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0036 /* MapView.swift */; };
+		AA0037 /* Step0_PhoneOTPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0038 /* Step0_PhoneOTPView.swift */; };
+		AA0039 /* Step1_KYCBasicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0040 /* Step1_KYCBasicView.swift */; };
+		AA0041 /* Step2_IDScanOCRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0042 /* Step2_IDScanOCRView.swift */; };
+		AA0043 /* Step3_NamesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0044 /* Step3_NamesView.swift */; };
+		AA0045 /* Step4_ContactMaritalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0046 /* Step4_ContactMaritalView.swift */; };
+		AA0047 /* Step5_JobIncomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0048 /* Step5_JobIncomeView.swift */; };
+		AA0049 /* Step6_NationalAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0050 /* Step6_NationalAddressView.swift */; };
+		AA0051 /* Step7_AccountDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0052 /* Step7_AccountDetailsView.swift */; };
+		AA0053 /* Step8_LoginCredentialsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0054 /* Step8_LoginCredentialsView.swift */; };
+		AA0055 /* SuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0056 /* SuccessView.swift */; };
+		AA0DD197 /* OpportunityDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1F8BEE /* OpportunityDetailView.swift */; };
+		AA8495C4 /* BottomNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABA3417 /* BottomNavigationBar.swift */; };
+		AA855EA9 /* DesignConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA61B0B3 /* DesignConstants.swift */; };
+		AABE403C /* OpportunitiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA588559 /* OpportunitiesView.swift */; };
+		AAC785E2 /* InvestmentOpportunity.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA89996C /* InvestmentOpportunity.swift */; };
+		AAD3D33E /* OpportunitiesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAECC457 /* OpportunitiesViewModel.swift */; };
+		AAD92ECA /* TimelineItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0ECE19 /* TimelineItem.swift */; };
+		AADBCB35 /* OpportunityCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA90AC89 /* OpportunityCard.swift */; };
+		AA89F721 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB021F1 /* Transaction.swift */; };
+		AADE9B28 /* WalletViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE045545 /* WalletViewModel.swift */; };
+		AA9C2F92 /* WalletView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC011863 /* WalletView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		AA0002 /* SaudiOnboardingDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaudiOnboardingDemoApp.swift; sourceTree = "<group>"; };
+		AA0004 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		AA0006 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AA0008 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		AA0010 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		AA0012 /* RegexPatterns.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegexPatterns.swift; sourceTree = "<group>"; };
+		AA0014 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
+		AA0016 /* RegistrationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationData.swift; sourceTree = "<group>"; };
+		AA0018 /* SaudiIdOcrResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaudiIdOcrResponse.swift; sourceTree = "<group>"; };
+		AA0020 /* OcrService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OcrService.swift; sourceTree = "<group>"; };
+		AA0022 /* FaceMatchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceMatchService.swift; sourceTree = "<group>"; };
+		AA0024 /* ValidationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationService.swift; sourceTree = "<group>"; };
+		AA0026 /* ProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
+		AA0028 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		AA0030 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		AA0032 /* CustomPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPicker.swift; sourceTree = "<group>"; };
+		AA0034 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		AA0036 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		AA0038 /* Step0_PhoneOTPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Step0_PhoneOTPView.swift; sourceTree = "<group>"; };
+		AA0040 /* Step1_KYCBasicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Step1_KYCBasicView.swift; sourceTree = "<group>"; };
+		AA0042 /* Step2_IDScanOCRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Step2_IDScanOCRView.swift; sourceTree = "<group>"; };
+		AA0044 /* Step3_NamesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Step3_NamesView.swift; sourceTree = "<group>"; };
+		AA0046 /* Step4_ContactMaritalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Step4_ContactMaritalView.swift; sourceTree = "<group>"; };
+		AA0048 /* Step5_JobIncomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Step5_JobIncomeView.swift; sourceTree = "<group>"; };
+		AA0050 /* Step6_NationalAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Step6_NationalAddressView.swift; sourceTree = "<group>"; };
+		AA0052 /* Step7_AccountDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Step7_AccountDetailsView.swift; sourceTree = "<group>"; };
+		AA0054 /* Step8_LoginCredentialsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Step8_LoginCredentialsView.swift; sourceTree = "<group>"; };
+		AA0056 /* SuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessView.swift; sourceTree = "<group>"; };
+		AA0057 /* SaudiOnboardingDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SaudiOnboardingDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA0058 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AA0ECE19 /* TimelineItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineItem.swift; sourceTree = "<group>"; };
+		AA1F8BEE /* OpportunityDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpportunityDetailView.swift; sourceTree = "<group>"; };
+		AA588559 /* OpportunitiesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpportunitiesView.swift; sourceTree = "<group>"; };
+		AA61B0B3 /* DesignConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignConstants.swift; sourceTree = "<group>"; };
+		AA89996C /* InvestmentOpportunity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvestmentOpportunity.swift; sourceTree = "<group>"; };
+		AA90AC89 /* OpportunityCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpportunityCard.swift; sourceTree = "<group>"; };
+		AABA3417 /* BottomNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomNavigationBar.swift; sourceTree = "<group>"; };
+		AAECC457 /* OpportunitiesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpportunitiesViewModel.swift; sourceTree = "<group>"; };
+		AA021F1B /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
+		AAE45545 /* WalletViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewModel.swift; sourceTree = "<group>"; };
+		AA011863 /* WalletView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AA0059 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AA0060 = {
+			isa = PBXGroup;
+			children = (
+				AA0061 /* SaudiOnboardingDemo */,
+				AA0062 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AA0061 /* SaudiOnboardingDemo */ = {
+			isa = PBXGroup;
+			children = (
+				AA0002 /* SaudiOnboardingDemoApp.swift */,
+				AA0058 /* Info.plist */,
+				AA0063 /* Models */,
+				AA924F62 /* ViewModels */,
+				AA0064 /* Services */,
+				AA0065 /* Utilities */,
+				AA0066 /* Views */,
+				AA0006 /* Assets.xcassets */,
+				AA0067 /* Preview Content */,
+			);
+			path = SaudiOnboardingDemo;
+			sourceTree = "<group>";
+		};
+		AA0062 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AA0057 /* SaudiOnboardingDemo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AA0063 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				AA0014 /* Enums.swift */,
+				AA0016 /* RegistrationData.swift */,
+				AA0018 /* SaudiIdOcrResponse.swift */,
+				AA89996C /* InvestmentOpportunity.swift */,
+				AA0ECE19 /* TimelineItem.swift */,
+				AAB021F1 /* Transaction.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		AA0064 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				AA0020 /* OcrService.swift */,
+				AA0022 /* FaceMatchService.swift */,
+				AA0024 /* ValidationService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		AA0065 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				AA0010 /* Constants.swift */,
+				AA0012 /* RegexPatterns.swift */,
+				AA61B0B3 /* DesignConstants.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		AA0066 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				AA0004 /* ContentView.swift */,
+				AA0056 /* SuccessView.swift */,
+				AA0068 /* Components */,
+				AA0069 /* Steps */,
+				AA1FE1A1 /* Opportunities */,
+				AAF1D7DD /* OpportunityDetail */,
+				AAA0EA14 /* Wallet */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		AA0067 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				AA0008 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		AA0068 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				AA0026 /* ProgressBar.swift */,
+				AA0028 /* CustomButton.swift */,
+				AA0030 /* CustomTextField.swift */,
+				AA0032 /* CustomPicker.swift */,
+				AA0034 /* ImagePicker.swift */,
+				AA0036 /* MapView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		AA0069 /* Steps */ = {
+			isa = PBXGroup;
+			children = (
+				AA0038 /* Step0_PhoneOTPView.swift */,
+				AA0040 /* Step1_KYCBasicView.swift */,
+				AA0042 /* Step2_IDScanOCRView.swift */,
+				AA0044 /* Step3_NamesView.swift */,
+				AA0046 /* Step4_ContactMaritalView.swift */,
+				AA0048 /* Step5_JobIncomeView.swift */,
+				AA0050 /* Step6_NationalAddressView.swift */,
+				AA0052 /* Step7_AccountDetailsView.swift */,
+				AA0054 /* Step8_LoginCredentialsView.swift */,
+			);
+			path = Steps;
+			sourceTree = "<group>";
+		};
+		AA1FE1A1 /* Opportunities */ = {
+			isa = PBXGroup;
+			children = (
+				AA588559 /* OpportunitiesView.swift */,
+				AA90AC89 /* OpportunityCard.swift */,
+				AABA3417 /* BottomNavigationBar.swift */,
+			);
+			path = Opportunities;
+			sourceTree = "<group>";
+		};
+		AA924F62 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				AAECC457 /* OpportunitiesViewModel.swift */,
+				AAE045545 /* WalletViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		AAF1D7DD /* OpportunityDetail */ = {
+			isa = PBXGroup;
+			children = (
+				AA1F8BEE /* OpportunityDetailView.swift */,
+			);
+			path = OpportunityDetail;
+			sourceTree = "<group>";
+		};
+		AAA0EA14 /* Wallet */ = {
+			isa = PBXGroup;
+			children = (
+				AAC011863 /* WalletView.swift */,
+			);
+			path = Wallet;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AA0070 /* SaudiOnboardingDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA0071 /* Build configuration list for PBXNativeTarget "SaudiOnboardingDemo" */;
+			buildPhases = (
+				AA0072 /* Sources */,
+				AA0059 /* Frameworks */,
+				AA0073 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SaudiOnboardingDemo;
+			productName = SaudiOnboardingDemo;
+			productReference = AA0057 /* SaudiOnboardingDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AA0074 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					AA0070 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+				};
+			};
+			buildConfigurationList = AA0075 /* Build configuration list for PBXProject "SaudiOnboardingDemo" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = AA0060;
+			productRefGroup = AA0062 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AA0070 /* SaudiOnboardingDemo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AA0073 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA0007 /* Preview Assets.xcassets in Resources */,
+				AA0005 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AA0072 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA0003 /* ContentView.swift in Sources */,
+				AA0001 /* SaudiOnboardingDemoApp.swift in Sources */,
+				AA0009 /* Constants.swift in Sources */,
+				AA0011 /* RegexPatterns.swift in Sources */,
+				AA0013 /* Enums.swift in Sources */,
+				AA0015 /* RegistrationData.swift in Sources */,
+				AA0017 /* SaudiIdOcrResponse.swift in Sources */,
+				AA0019 /* OcrService.swift in Sources */,
+				AA0021 /* FaceMatchService.swift in Sources */,
+				AA0023 /* ValidationService.swift in Sources */,
+				AA0025 /* ProgressBar.swift in Sources */,
+				AA0027 /* CustomButton.swift in Sources */,
+				AA0029 /* CustomTextField.swift in Sources */,
+				AA0031 /* CustomPicker.swift in Sources */,
+				AA0033 /* ImagePicker.swift in Sources */,
+				AA0035 /* MapView.swift in Sources */,
+				AA0037 /* Step0_PhoneOTPView.swift in Sources */,
+				AA0039 /* Step1_KYCBasicView.swift in Sources */,
+				AA0041 /* Step2_IDScanOCRView.swift in Sources */,
+				AA0043 /* Step3_NamesView.swift in Sources */,
+				AA0045 /* Step4_ContactMaritalView.swift in Sources */,
+				AA0047 /* Step5_JobIncomeView.swift in Sources */,
+				AA0049 /* Step6_NationalAddressView.swift in Sources */,
+				AA0051 /* Step7_AccountDetailsView.swift in Sources */,
+				AA0053 /* Step8_LoginCredentialsView.swift in Sources */,
+				AA0055 /* SuccessView.swift in Sources */,
+				AAC785E2 /* InvestmentOpportunity.swift in Sources */,
+				AAD3D33E /* OpportunitiesViewModel.swift in Sources */,
+				AABE403C /* OpportunitiesView.swift in Sources */,
+				AADBCB35 /* OpportunityCard.swift in Sources */,
+				AA8495C4 /* BottomNavigationBar.swift in Sources */,
+				AAD92ECA /* TimelineItem.swift in Sources */,
+				AA0DD197 /* OpportunityDetailView.swift in Sources */,
+				AA855EA9 /* DesignConstants.swift in Sources */,
+				AA89F721 /* Transaction.swift in Sources */,
+				AADE9B28 /* WalletViewModel.swift in Sources */,
+				AA9C2F92 /* WalletView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		AA0076 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		AA0077 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		AA0078 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"SaudiOnboardingDemo/Preview Content\"";
+				DEVELOPMENT_TEAM = 7M3PR8TQAD;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = SaudiOnboardingDemo/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mob.jkb;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		AA0079 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"SaudiOnboardingDemo/Preview Content\"";
+				DEVELOPMENT_TEAM = 7M3PR8TQAD;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = SaudiOnboardingDemo/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mob.jkb;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AA0071 /* Build configuration list for PBXNativeTarget "SaudiOnboardingDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA0078 /* Debug */,
+				AA0079 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AA0075 /* Build configuration list for PBXProject "SaudiOnboardingDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA0076 /* Debug */,
+				AA0077 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AA0074 /* Project object */;
+}

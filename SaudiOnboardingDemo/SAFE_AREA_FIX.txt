@@ -1,0 +1,222 @@
+================================================================
+   Safe Area & Content Clipping Fix - إصلاح شامل ✓
+================================================================
+
+✅ المشكلة الرئيسية:
+-------------------
+النصوص والمحتوى مقصوص من اليمين واليسار على الأجهزة
+ذات الحواف المنحنية (iPhone 17 Pro Max)
+
+الأسباب:
+1. استخدام .ignoresSafeArea() على الكونتينر الرئيسي
+2. Padding غير متناسق
+3. لا يوجد gutter ثابت
+4. استخدام خاطئ للـ padding داخل ScrollView
+
+================================================================
+
+✅ الحل المطبّق:
+---------------
+
+1. إنشاء DesignConstants.swift:
+   ثابت gutter واحد: 20pt
+   
+   ```swift
+   enum DesignConstants {
+       static let horizontalGutter: CGFloat = 20
+   }
+   
+   extension View {
+       func contentPadding() -> some View {
+           self.padding(.horizontal, DesignConstants.horizontalGutter)
+       }
+   }
+   ```
+
+2. إعادة هيكلة OpportunityDetailView:
+
+   أ) Hero Section (Edge-to-Edge):
+      - الصورة فقط تملأ الشاشة
+      - المحتوى فوق الصورة:
+        ✓ .contentPadding() // 20pt من كل جانب
+        ✓ LIVE FUNDING badge
+        ✓ العنوان والموقع
+
+   ب) Main Content:
+      - إزالة .padding(.horizontal, 20) من الـ VStack الرئيسي
+      - كل section يأخذ .contentPadding() منفصل:
+        ✓ statsSection
+        ✓ fundingProgressSection
+        ✓ viewersSection
+        ✓ calculatorCard
+        ✓ timelineSection
+        ✓ dueDiligenceSection
+        ✓ documentsSection
+
+   ج) Navigation Bar:
+      ✓ .contentPadding() // 20pt من الحواف
+      ✓ فوق الصورة مباشرة
+
+   د) Bottom Action Bar:
+      ✓ .contentPadding() // 20pt من الحواف
+      ✓ Safe area handled للأسفل
+
+3. إزالة .edgesIgnoringSafeArea() من الكونتينر:
+   - فقط .ignoresSafeArea(edges: .bottom) للـ bottom bar
+
+4. جميع العناصر:
+   ✓ .frame(maxWidth: .infinity, alignment: .leading)
+   ✓ Consistent 20pt gutter
+
+================================================================
+
+📐 البنية الجديدة:
+------------------
+
+```
+ZStack {
+    ScrollView {                           // No padding here!
+        VStack {
+            heroSection                    // Edge-to-edge
+                ├─ Image (full width)
+                └─ Content with .contentPadding()
+            
+            VStack {                       // No padding here!
+                statsSection.contentPadding()
+                fundingSection.contentPadding()
+                viewersSection.contentPadding()
+                calculatorCard.contentPadding()
+                timelineSection.contentPadding()
+                dueDiligenceSection.contentPadding()
+                documentsSection.contentPadding()
+            }
+        }
+    }
+    
+    customNavBar.contentPadding()         // 20pt gutter
+    bottomActionBar.contentPadding()      // 20pt gutter
+}
+.ignoresSafeArea(edges: .bottom)          // Only bottom!
+```
+
+================================================================
+
+🔧 التفاصيل التقنية:
+-------------------
+
+Before (مشاكل):
+```swift
+VStack {
+    // content
+}
+.padding(.horizontal, 20)  // ❌ Wrong! في ScrollView
+.edgesIgnoringSafeArea(.all)  // ❌ Wrong!
+```
+
+After (الحل):
+```swift
+VStack {
+    section1.contentPadding()  // ✅ Each section
+    section2.contentPadding()  // ✅ Individual
+    section3.contentPadding()  // ✅ Consistent
+}
+// No padding on VStack itself!
+
+.ignoresSafeArea(edges: .bottom)  // ✅ Only bottom
+```
+
+================================================================
+
+✅ Navigation Fix:
+-----------------
+
+زر الرجوع الآن يعمل:
+```swift
+Button(action: {
+    presentationMode.wrappedValue.dismiss()
+}) {
+    Image(systemName: "arrow.left")
+        // styling...
+}
+```
+
+في OpportunitiesView:
+```swift
+NavigationLink(destination: OpportunityDetailView(...)) {
+    OpportunityCard(...)
+}
+.buttonStyle(PlainButtonStyle())
+```
+
+================================================================
+
+✅ النتيجة النهائية:
+-------------------
+
+Before:
+❌ "Riyadh Logistics..." مقصوص من اليسار
+❌ "Funding Progress" مقصوص
+❌ "Target: 40,000,000 SAR" مقصوص
+❌ Calculator values مقصوصة
+❌ زر الرجوع ما يشتغل
+
+After:
+✅ جميع النصوص ظاهرة بالكامل
+✅ Gutter ثابت 20pt من كل جانب
+✅ Safe area محترمة بالكامل
+✅ التصميم متناسق
+✅ زر الرجوع يعمل بشكل مثالي
+✅ Navigation سلس
+
+================================================================
+
+📱 Safe Area Handling:
+---------------------
+
+Hero Image: 
+  - Edge-to-edge (full width)
+  - Content overlay: .contentPadding()
+
+Main Content:
+  - Each section: .contentPadding()
+  - Consistent 20pt gutter
+
+Navigation Bar:
+  - .contentPadding()
+  - Over the image
+
+Bottom Bar:
+  - .contentPadding()
+  - .ignoresSafeArea(edges: .bottom) للامتداد تحت
+
+================================================================
+
+✅ Build Status: SUCCESS ✓
+--------------------------
+
+** BUILD SUCCEEDED **
+
+================================================================
+
+🎯 الخلاصة:
+-----------
+
+المشكلة: النصوص مقصوصة + Navigation لا يعمل
+
+الحل:
+1. ✓ DesignConstants مع gutter ثابت (20pt)
+2. ✓ .contentPadding() لكل section
+3. ✓ .frame(maxWidth: .infinity) لكل العناصر
+4. ✓ .ignoresSafeArea(edges: .bottom) فقط
+5. ✓ Navigation fixed
+
+النتيجة:
+✓ جميع النصوص ظاهرة بالكامل
+✓ Gutter متناسق من كل الجوانب
+✓ Safe area محترمة
+✓ Navigation يعمل
+✓ التصميم مثالي
+
+كل شيء يعمل بشكل مثالي الآن! 🎉
+
+================================================================

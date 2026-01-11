@@ -1,0 +1,162 @@
+//
+//  CustomTextField.swift
+//  SaudiOnboardingDemo
+//
+//  Created on 2026
+//
+
+import SwiftUI
+
+struct CustomTextField: View {
+    let title: String
+    @Binding var text: String
+    var placeholder: String = ""
+    var keyboardType: UIKeyboardType = .default
+    var errorMessage: String? = nil
+    var isDisabled: Bool = false
+    @FocusState private var isFocused: Bool
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(title)
+                .font(.subheadline)
+                .fontWeight(.medium)
+                .foregroundColor(AppColors.textPrimary)
+                .frame(maxWidth: .infinity, alignment: .leading)
+
+            TextField(placeholder, text: $text)
+                .keyboardType(keyboardType)
+                .textFieldStyle(.plain)
+                .padding()
+                .background(isDisabled ? Color.gray.opacity(0.1) : AppColors.background)
+                .cornerRadius(8)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(errorMessage != nil ? AppColors.error : Color.gray.opacity(0.3), lineWidth: 1)
+                )
+                .disabled(isDisabled)
+                .focused($isFocused)
+                .toolbar {
+                    ToolbarItemGroup(placement: .keyboard) {
+                        Spacer()
+                        Button("Done") {
+                            hideKeyboard()
+                        }
+                        .foregroundColor(AppColors.primary)
+                    }
+                }
+
+            if let errorMessage = errorMessage {
+                Text(errorMessage)
+                    .font(.caption)
+                    .foregroundColor(AppColors.error)
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .onTapGesture {
+            if isFocused {
+                hideKeyboard()
+            }
+        }
+    }
+}
+
+struct CustomSecureField: View {
+    let title: String
+    @Binding var text: String
+    var placeholder: String = ""
+    var errorMessage: String? = nil
+    @FocusState private var isFocused: Bool
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(title)
+                .font(.subheadline)
+                .fontWeight(.medium)
+                .foregroundColor(AppColors.textPrimary)
+                .frame(maxWidth: .infinity, alignment: .leading)
+
+            SecureField(placeholder, text: $text)
+                .textFieldStyle(.plain)
+                .padding()
+                .background(AppColors.background)
+                .cornerRadius(8)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(errorMessage != nil ? AppColors.error : Color.gray.opacity(0.3), lineWidth: 1)
+                )
+                .focused($isFocused)
+                .toolbar {
+                    ToolbarItemGroup(placement: .keyboard) {
+                        Spacer()
+                        Button("Done") {
+                            hideKeyboard()
+                        }
+                        .foregroundColor(AppColors.primary)
+                    }
+                }
+
+            if let errorMessage = errorMessage {
+                Text(errorMessage)
+                    .font(.caption)
+                    .foregroundColor(AppColors.error)
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .onTapGesture {
+            if isFocused {
+                hideKeyboard()
+            }
+        }
+    }
+}
+
+struct CustomDatePicker: View {
+    let title: String
+    @Binding var selection: Date
+    var displayedComponents: DatePickerComponents = .date
+    var errorMessage: String? = nil
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(title)
+                .font(.subheadline)
+                .fontWeight(.medium)
+                .foregroundColor(AppColors.textPrimary)
+                .frame(maxWidth: .infinity, alignment: .leading)
+
+            DatePicker("", selection: $selection, displayedComponents: displayedComponents)
+                .datePickerStyle(.compact)
+                .labelsHidden()
+                .padding()
+                .background(AppColors.background)
+                .cornerRadius(8)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(errorMessage != nil ? AppColors.error : Color.gray.opacity(0.3), lineWidth: 1)
+                )
+
+            if let errorMessage = errorMessage {
+                Text(errorMessage)
+                    .font(.caption)
+                    .foregroundColor(AppColors.error)
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+}
+
+extension View {
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
+
+#Preview {
+    VStack {
+        CustomTextField(title: "رقم الجوال", text: .constant(""), placeholder: "05xxxxxxxx")
+        CustomTextField(title: "البريد الإلكتروني", text: .constant("test"), placeholder: "email@example.com", errorMessage: "البريد الإلكتروني غير صحيح")
+        CustomSecureField(title: "كلمة المرور", text: .constant(""), placeholder: "********")
+    }
+    .padding()
+}
