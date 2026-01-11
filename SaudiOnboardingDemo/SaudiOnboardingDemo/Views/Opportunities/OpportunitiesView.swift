@@ -117,7 +117,7 @@ struct OpportunitiesView: View {
         ScrollView(showsIndicators: false) {
             LazyVStack(spacing: 20) {
                 ForEach(viewModel.filteredOpportunities) { opportunity in
-                    NavigationLink(destination: OpportunityDetailView(opportunity: opportunity)) {
+                    NavigationLink(destination: OpportunityDetailView(opportunity: opportunity, hideTabBar: .constant(true))) {
                         OpportunityCard(opportunity: opportunity)
                     }
                     .buttonStyle(.plain)

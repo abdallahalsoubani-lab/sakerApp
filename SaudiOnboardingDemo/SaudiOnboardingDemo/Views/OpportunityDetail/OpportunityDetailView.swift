@@ -12,6 +12,7 @@ struct OpportunityDetailView: View {
     
     // MARK: - Properties
     let opportunity: InvestmentOpportunity
+    @Binding var hideTabBar: Bool
     @Environment(\.presentationMode) var presentationMode
     @State private var investmentAmount: Double = 26000
     @State private var showingCalculator = false
@@ -31,31 +32,48 @@ struct OpportunityDetailView: View {
     
     // MARK: - Body
     var body: some View {
-        ScrollView(showsIndicators: false) {
-            VStack(spacing: 0) {
-                // Hero Image Section (Edge-to-Edge)
-                heroSection
-                
-                // Content Sections
-                VStack(spacing: DesignConstants.sectionSpacing) {
-                    statsSection
-                    fundingProgressSection
-                    viewersSection
-                    calculatorCard
-                    timelineSection
-                    dueDiligenceSection
-                    documentsSection
+        GeometryReader { geometry in
+            ZStack(alignment: .top) {
+                ScrollView(showsIndicators: false) {
+                    VStack(spacing: 0) {
+                        // Hero Image Section (Edge-to-Edge from top)
+                        heroSection
+                            .frame(width: geometry.size.width)
+                        
+                        // Content Sections
+                        VStack(spacing: DesignConstants.sectionSpacing) {
+                            statsSection
+                            fundingProgressSection
+                            viewersSection
+                            calculatorCard
+                            timelineSection
+                            dueDiligenceSection
+                            documentsSection
+                        }
+                        .frame(maxWidth: geometry.size.width)
+                        .contentPadding()
+                        .padding(.top, DesignConstants.sectionSpacing)
+                        .padding(.bottom, 100)
+                    }
+                    .frame(maxWidth: geometry.size.width)
                 }
-                .contentPadding()
-                .padding(.top, DesignConstants.sectionSpacing)
+                .ignoresSafeArea(edges: .top)
+                
+                // Custom Navigation Bar
+                customNavBar
+                    .frame(width: geometry.size.width)
+            }
+            .navigationBarHidden(true)
+            .safeAreaInset(edge: .bottom) {
+                bottomActionBar
+                    .frame(width: geometry.size.width)
             }
         }
-        .overlay(alignment: .top) {
-            customNavBar
+        .onAppear {
+            hideTabBar = true
         }
-        .navigationBarHidden(true)
-        .safeAreaInset(edge: .bottom) {
-            bottomActionBar
+        .onDisappear {
+            hideTabBar = false
         }
     }
     
@@ -66,7 +84,7 @@ struct OpportunityDetailView: View {
             Image(opportunity.imageName)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .frame(height: 350)
+                .frame(height: 380)
                 .clipped()
                 .overlay(
                     LinearGradient(
@@ -79,7 +97,6 @@ struct OpportunityDetailView: View {
                         endPoint: .center
                     )
                 )
-                .ignoresSafeArea(edges: .top)
             
             // LIVE FUNDING Badge (With Gutter)
             if opportunity.status == .active {
@@ -98,21 +115,22 @@ struct OpportunityDetailView: View {
                         .padding(.vertical, 6)
                         .background(Color.white.cornerRadius(16))
                     }
-                    .padding(.horizontal, DesignConstants.horizontalGutter)
+                    .padding(.trailing, 24)
                     Spacer()
                 }
                 .padding(.top, 60)
             }
             
-            // Title and Location (With Gutter)
+            // Title and Location (With Extra Gutter for Safety)
             VStack(alignment: .leading, spacing: 8) {
                 Text(opportunity.title)
-                    .font(.system(size: 24, weight: .bold))
+                    .font(.system(size: 22, weight: .bold))
                     .foregroundColor(.white)
                     .shadow(color: Color.black.opacity(0.3), radius: 4, x: 0, y: 2)
                     .lineLimit(2)
-                    .minimumScaleFactor(0.7)
+                    .minimumScaleFactor(0.8)
                     .fixedSize(horizontal: false, vertical: true)
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 
                 HStack(spacing: 6) {
                     Image(systemName: "mappin.circle.fill")
@@ -125,10 +143,11 @@ struct OpportunityDetailView: View {
                 .foregroundColor(.white)
                 .shadow(color: Color.black.opacity(0.3), radius: 4, x: 0, y: 2)
             }
-            .padding(.horizontal, DesignConstants.horizontalGutter)
-            .padding(.bottom, 16)
+            .padding(.leading, 28)
+            .padding(.trailing, DesignConstants.horizontalGutter)
+            .padding(.bottom, 20)
         }
-        .frame(height: 350)
+        .frame(height: 380)
     }
     
     // MARK: - Stats Section
@@ -619,6 +638,6 @@ struct TimelineRow: View {
 // MARK: - Preview
 struct OpportunityDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        OpportunityDetailView(opportunity: InvestmentOpportunity.mockData[0])
+        OpportunityDetailView(opportunity: InvestmentOpportunity.mockData[0], hideTabBar: .constant(true))
     }
 }

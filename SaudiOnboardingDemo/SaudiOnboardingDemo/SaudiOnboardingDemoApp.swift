@@ -21,22 +21,148 @@ struct SaudiOnboardingDemoApp: App {
 // MARK: - Root Tab View
 struct RootTabView: View {
     @State private var selectedTab: Int = 0
+    @State private var hideTabBar: Bool = false
     
     var body: some View {
-        Group {
-            switch selectedTab {
-            case 0:
-                OpportunitiesView()
-            case 1:
-                WalletView()
-            case 2:
-                ProfilePlaceholderView()
-            default:
-                OpportunitiesView()
+        ZStack(alignment: .bottom) {
+            Group {
+                switch selectedTab {
+                case 0:
+                    NavigationView {
+                        OpportunitiesViewWithTabControl(hideTabBar: $hideTabBar)
+                    }
+                    .navigationViewStyle(.stack)
+                case 1:
+                    WalletView()
+                case 2:
+                    ProfilePlaceholderView()
+                default:
+                    NavigationView {
+                        OpportunitiesViewWithTabControl(hideTabBar: $hideTabBar)
+                    }
+                    .navigationViewStyle(.stack)
+                }
+            }
+            
+            if !hideTabBar {
+                BottomNavigationBar(selectedTab: $selectedTab)
             }
         }
-        .safeAreaInset(edge: .bottom) {
-            BottomNavigationBar(selectedTab: $selectedTab)
+    }
+}
+
+// MARK: - Opportunities View with Tab Control
+struct OpportunitiesViewWithTabControl: View {
+    @Binding var hideTabBar: Bool
+    
+    var body: some View {
+        OpportunitiesViewContent(hideTabBar: $hideTabBar)
+            .onAppear {
+                hideTabBar = false
+            }
+    }
+}
+
+struct OpportunitiesViewContent: View {
+    @StateObject private var viewModel = OpportunitiesViewModel()
+    @Binding var hideTabBar: Bool
+    private let gutter: CGFloat = 20
+    
+    var body: some View {
+        VStack(spacing: 0) {
+            headerSection
+            searchBarSection
+            filterSection
+            opportunitiesListSection
+        }
+        .background(Color(UIColor.systemGroupedBackground))
+        .navigationBarHidden(true)
+    }
+    
+    private var headerSection: some View {
+        HStack {
+            VStack(alignment: .leading, spacing: 4) {
+                Text("Opportunities")
+                    .font(.system(size: 32, weight: .bold))
+                    .foregroundColor(.primary)
+                
+                Text("Explore vetted real estate assets")
+                    .font(.system(size: 15))
+                    .foregroundColor(.secondary)
+            }
+            
+            Spacer()
+            
+            Button(action: {}) {
+                Image(systemName: "slider.horizontal.3")
+                    .font(.system(size: 20))
+                    .foregroundColor(.primary)
+                    .frame(width: 44, height: 44)
+            }
+        }
+        .padding(.horizontal, gutter)
+        .padding(.top, 16)
+        .padding(.bottom, 12)
+        .background(Color(UIColor.systemBackground))
+    }
+    
+    private var searchBarSection: some View {
+        HStack(spacing: 12) {
+            Image(systemName: "magnifyingglass")
+                .foregroundColor(.gray)
+                .font(.system(size: 18))
+            
+            TextField("Search location or asset...", text: $viewModel.searchText)
+                .font(.system(size: 16))
+        }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 12)
+        .background(Color(UIColor.systemGray6))
+        .cornerRadius(12)
+        .padding(.horizontal, gutter)
+        .padding(.bottom, 16)
+        .background(Color(UIColor.systemBackground))
+    }
+    
+    private var filterSection: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 12) {
+                ForEach(PropertyType.allCases) { type in
+                    FilterButton(
+                        title: type.displayName,
+                        isSelected: viewModel.selectedFilter == type
+                    ) {
+                        withAnimation(.easeInOut(duration: 0.2)) {
+                            viewModel.selectFilter(type)
+                        }
+                    }
+                }
+            }
+            .padding(.horizontal, gutter)
+        }
+        .padding(.vertical, 16)
+        .background(Color(UIColor.systemBackground))
+    }
+    
+    private var opportunitiesListSection: some View {
+        ScrollView(showsIndicators: false) {
+            LazyVStack(spacing: 20) {
+                ForEach(viewModel.filteredOpportunities) { opportunity in
+                    NavigationLink(
+                        destination: OpportunityDetailView(opportunity: opportunity, hideTabBar: $hideTabBar)
+                    ) {
+                        OpportunityCard(opportunity: opportunity)
+                    }
+                    .buttonStyle(.plain)
+                    .simultaneousGesture(TapGesture().onEnded {
+                        withAnimation {
+                            hideTabBar = true
+                        }
+                    })
+                }
+            }
+            .padding(.horizontal, gutter)
+            .padding(.vertical, 20)
         }
     }
 }
