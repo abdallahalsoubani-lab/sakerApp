@@ -115,36 +115,37 @@ struct OpportunityDetailView: View {
                         .padding(.vertical, 6)
                         .background(Color.white.cornerRadius(16))
                     }
-                    .padding(.trailing, 24)
+                    .padding(.trailing, 40)
                     Spacer()
                 }
                 .padding(.top, 60)
             }
             
-            // Title and Location (With Extra Gutter for Safety)
-            VStack(alignment: .leading, spacing: 8) {
-                Text(opportunity.title)
-                    .font(.system(size: 22, weight: .bold))
+            // Title and Location
+            HStack {
+                VStack(alignment: .leading, spacing: 8) {
+                    Text(opportunity.title)
+                        .font(.system(size: 22, weight: .bold))
+                        .foregroundColor(.white)
+                        .shadow(color: Color.black.opacity(0.3), radius: 4, x: 0, y: 2)
+                        .lineLimit(2)
+                        .minimumScaleFactor(0.8)
+                        .fixedSize(horizontal: false, vertical: true)
+                    
+                    HStack(spacing: 6) {
+                        Image(systemName: "mappin.circle.fill")
+                            .font(.system(size: 13))
+                        Text(opportunity.location)
+                            .font(.system(size: 13, weight: .medium))
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.8)
+                    }
                     .foregroundColor(.white)
                     .shadow(color: Color.black.opacity(0.3), radius: 4, x: 0, y: 2)
-                    .lineLimit(2)
-                    .minimumScaleFactor(0.8)
-                    .fixedSize(horizontal: false, vertical: true)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                
-                HStack(spacing: 6) {
-                    Image(systemName: "mappin.circle.fill")
-                        .font(.system(size: 13))
-                    Text(opportunity.location)
-                        .font(.system(size: 13, weight: .medium))
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.8)
                 }
-                .foregroundColor(.white)
-                .shadow(color: Color.black.opacity(0.3), radius: 4, x: 0, y: 2)
+                Spacer(minLength: 0)
             }
-            .padding(.leading, 28)
-            .padding(.trailing, DesignConstants.horizontalGutter)
+            .padding(.horizontal, 40)
             .padding(.bottom, 20)
         }
         .frame(height: 380)
@@ -520,8 +521,9 @@ struct OpportunityDetailView: View {
                     .cornerRadius(20)
             }
         }
-        .padding(.horizontal, DesignConstants.horizontalGutter)
-        .padding(.top, 50)
+        .padding(.leading, 40)
+        .padding(.trailing, 40)
+        .padding(.top, 16)
     }
     
     // MARK: - Bottom Action Bar
