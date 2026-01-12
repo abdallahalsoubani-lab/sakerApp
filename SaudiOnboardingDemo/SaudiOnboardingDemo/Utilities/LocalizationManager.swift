@@ -174,8 +174,8 @@ struct LocalizedStrings {
         
         // MARK: - Profile Screen
         "profile.title": [.english: "Profile", .arabic: "الملف الشخصي"],
-        "profile.name": [.english: "Faisal Al-Saud", .arabic: "فيصل آل سعود"],
-        "profile.email": [.english: "faisal@example.com", .arabic: "faisal@example.com"],
+        "profile.name": [.english: "Sultan Al-Otaibi", .arabic: "سلطان العتيبي "],
+        "profile.email": [.english: "Sultan@example.com", .arabic: "Sultan@example.com"],
         "profile.accredited": [.english: "ACCREDITED", .arabic: "معتمد"],
         "profile.verified": [.english: "Account Verified", .arabic: "الحساب موثق"],
         "profile.verifiedDesc": [.english: "Your KYC is complete and up to date.", .arabic: "اكتمل التحقق من هويتك ومحدث."],
