@@ -12,6 +12,9 @@
 		1B2F86352F15428500AA55E3 /* LaunchScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B2F86342F15428500AA55E3 /* LaunchScreenView.swift */; };
 		1B2F86372F1544EE00AA55E3 /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B2F86362F1544EE00AA55E3 /* ThemeManager.swift */; };
 		1B2F864A2F1545FC00AA55E3 /* CurrencyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B2F86492F1545FC00AA55E3 /* CurrencyView.swift */; };
+		1B2F864E2F15581500AA55E3 /* MyInvestment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B2F864B2F15581500AA55E3 /* MyInvestment.swift */; };
+		1B2F86502F15584A00AA55E3 /* MyInvestmentsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B2F864F2F15584A00AA55E3 /* MyInvestmentsViewModel.swift */; };
+		1B2F86532F15586000AA55E3 /* MyInvestmentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B2F86512F15586000AA55E3 /* MyInvestmentsView.swift */; };
 		AA0001 /* SaudiOnboardingDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0002 /* SaudiOnboardingDemoApp.swift */; };
 		AA0003 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0004 /* ContentView.swift */; };
 		AA0005 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA0006 /* Assets.xcassets */; };
@@ -59,6 +62,9 @@
 		1B2F86342F15428500AA55E3 /* LaunchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenView.swift; sourceTree = "<group>"; };
 		1B2F86362F1544EE00AA55E3 /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
 		1B2F86492F1545FC00AA55E3 /* CurrencyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyView.swift; sourceTree = "<group>"; };
+		1B2F864B2F15581500AA55E3 /* MyInvestment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInvestment.swift; sourceTree = "<group>"; };
+		1B2F864F2F15584A00AA55E3 /* MyInvestmentsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInvestmentsViewModel.swift; sourceTree = "<group>"; };
+		1B2F86512F15586000AA55E3 /* MyInvestmentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInvestmentsView.swift; sourceTree = "<group>"; };
 		AA0002 /* SaudiOnboardingDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaudiOnboardingDemoApp.swift; sourceTree = "<group>"; };
 		AA0004 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		AA0006 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -110,6 +116,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1B2F86522F15586000AA55E3 /* MyInvestments */ = {
+			isa = PBXGroup;
+			children = (
+				1B2F86512F15586000AA55E3 /* MyInvestmentsView.swift */,
+			);
+			path = MyInvestments;
+			sourceTree = "<group>";
+		};
 		AA0060 = {
 			isa = PBXGroup;
 			children = (
@@ -145,6 +159,7 @@
 		AA0063 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				1B2F864B2F15581500AA55E3 /* MyInvestment.swift */,
 				AA0014 /* Enums.swift */,
 				AA0016 /* RegistrationData.swift */,
 				AA0018 /* SaudiIdOcrResponse.swift */,
@@ -180,6 +195,7 @@
 		AA0066 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1B2F86522F15586000AA55E3 /* MyInvestments */,
 				AA0068 /* Components */,
 				1B2F86342F15428500AA55E3 /* LaunchScreenView.swift */,
 				AA0004 /* ContentView.swift */,
@@ -243,6 +259,7 @@
 		AA924F62 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				1B2F864F2F15584A00AA55E3 /* MyInvestmentsViewModel.swift */,
 				AAECC457 /* OpportunitiesViewModel.swift */,
 			);
 			path = ViewModels;
@@ -346,6 +363,8 @@
 				AA0025 /* ProgressBar.swift in Sources */,
 				AA0027 /* CustomButton.swift in Sources */,
 				AA0029 /* CustomTextField.swift in Sources */,
+				1B2F86532F15586000AA55E3 /* MyInvestmentsView.swift in Sources */,
+				1B2F86502F15584A00AA55E3 /* MyInvestmentsViewModel.swift in Sources */,
 				1B2F86332F15419A00AA55E3 /* LocalizationManager.swift in Sources */,
 				AA0031 /* CustomPicker.swift in Sources */,
 				1B2F86352F15428500AA55E3 /* LaunchScreenView.swift in Sources */,
@@ -362,6 +381,7 @@
 				AA0049 /* Step6_NationalAddressView.swift in Sources */,
 				AA0051 /* Step7_AccountDetailsView.swift in Sources */,
 				AA0053 /* Step8_LoginCredentialsView.swift in Sources */,
+				1B2F864E2F15581500AA55E3 /* MyInvestment.swift in Sources */,
 				AA0055 /* SuccessView.swift in Sources */,
 				AAC785E2 /* InvestmentOpportunity.swift in Sources */,
 				AAD3D33E /* OpportunitiesViewModel.swift in Sources */,

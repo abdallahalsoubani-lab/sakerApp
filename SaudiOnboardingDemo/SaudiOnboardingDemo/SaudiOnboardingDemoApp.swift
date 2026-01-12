@@ -41,8 +41,10 @@ struct RootTabView: View {
                     }
                     .navigationViewStyle(.stack)
                 case 1:
-                    WalletView()
+                    MyInvestmentsView()
                 case 2:
+                    WalletView()
+                case 3:
                     ProfilePlaceholderView()
                 default:
                     NavigationView {

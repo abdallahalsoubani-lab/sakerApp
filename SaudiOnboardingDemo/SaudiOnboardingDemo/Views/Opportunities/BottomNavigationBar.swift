@@ -18,6 +18,7 @@ struct BottomNavigationBar: View {
     private var tabs: [(icon: String, title: String)] {
         return [
             ("house.fill", LocalizedStrings.get("nav.invest")),
+            ("chart.bar.fill", LocalizedStrings.get("nav.myInvestments")),
             ("wallet.pass.fill", LocalizedStrings.get("nav.wallet")),
             ("person.fill", LocalizedStrings.get("nav.profile"))
         ]

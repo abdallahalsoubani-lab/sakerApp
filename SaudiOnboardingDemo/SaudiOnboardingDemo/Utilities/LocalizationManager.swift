@@ -85,6 +85,7 @@ struct LocalizedStrings {
         
         // MARK: - Bottom Navigation
         "nav.invest": [.english: "Invest", .arabic: "استثمر"],
+        "nav.myInvestments": [.english: "My Investments", .arabic: "استثماراتي"],
         "nav.wallet": [.english: "Wallet", .arabic: "المحفظة"],
         "nav.profile": [.english: "Profile", .arabic: "الملف الشخصي"],
         
@@ -220,6 +221,24 @@ struct LocalizedStrings {
         "theme.dark": [.english: "Dark", .arabic: "داكن"],
         "theme.system": [.english: "System", .arabic: "النظام"],
         "theme.title": [.english: "Appearance", .arabic: "المظهر"],
+        
+        // MARK: - My Investments Screen
+        "myInvestments.title": [.english: "My Investments", .arabic: "استثماراتي"],
+        "myInvestments.totalInvestment": [.english: "Total Investment", .arabic: "إجمالي الاستثمار"],
+        "myInvestments.currentValue": [.english: "Current Value", .arabic: "القيمة الحالية"],
+        "myInvestments.totalReturn": [.english: "Total Return", .arabic: "العائد الإجمالي"],
+        "myInvestments.totalFunds": [.english: "Total Funds", .arabic: "مجموع الصناديق"],
+        "myInvestments.profitDistributions": [.english: "Profit Distributions", .arabic: "توزيعات الأرباح"],
+        "myInvestments.currentInvestments": [.english: "Current Investments", .arabic: "الاستثمارات الحالية"],
+        "myInvestments.previousInvestments": [.english: "Previous Investments", .arabic: "استثمارات سابقة"],
+        "myInvestments.invested": [.english: "Invested", .arabic: "المبلغ المستثمر"],
+        "myInvestments.expectedReturn": [.english: "Expected Return", .arabic: "العائد المتوقع"],
+        "myInvestments.progress": [.english: "completed", .arabic: "مكتمل"],
+        "myInvestments.viewDetails": [.english: "View Details", .arabic: "عرض التفاصيل"],
+        "myInvestments.months": [.english: "48 months", .arabic: "٤٨ شهر"],
+        "myInvestments.stats.funds": [.english: "Funds", .arabic: "الصناديق"],
+        "myInvestments.stats.distributions": [.english: "Distributions", .arabic: "التوزيعات"],
+        "myInvestments.stats.return": [.english: "Return", .arabic: "العائد"],
     ]
 }
 
