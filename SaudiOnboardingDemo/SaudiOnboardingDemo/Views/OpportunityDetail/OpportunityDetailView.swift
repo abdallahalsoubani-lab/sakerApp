@@ -107,7 +107,7 @@ struct OpportunityDetailView: View {
                             Circle()
                                 .fill(Color.red)
                                 .frame(width: 6, height: 6)
-                            Text("LIVE FUNDING")
+                            Text(LocalizedStrings.get("status.active"))
                                 .font(.system(size: 10, weight: .bold))
                                 .foregroundColor(.primary)
                         }
@@ -157,7 +157,7 @@ struct OpportunityDetailView: View {
     private var statsSection: some View {
         HStack(spacing: 0) {
             VStack(spacing: ResponsiveLayout.smallSpacing) {
-                Text("ANNUAL RETURN")
+                Text(LocalizedStrings.get("detail.annualReturn"))
                     .font(.system(size: ResponsiveLayout.captionSize - 2, weight: .semibold))
                     .foregroundColor(.secondary)
                     .tracking(0.5)
@@ -177,14 +177,14 @@ struct OpportunityDetailView: View {
                 .frame(width: 1, height: ResponsiveLayout.iconSize)
             
             VStack(spacing: ResponsiveLayout.smallSpacing) {
-                Text("DISTRIBUTION")
+                Text(LocalizedStrings.get("detail.distribution"))
                     .font(.system(size: ResponsiveLayout.captionSize - 2, weight: .semibold))
                     .foregroundColor(.secondary)
                     .tracking(0.5)
                     .minimumScaleFactor(0.7)
                     .lineLimit(1)
                 
-                Text("Monthly")
+                Text(LocalizedStrings.get("detail.monthly"))
                     .font(.system(size: ResponsiveLayout.subtitleSize, weight: .bold))
                     .foregroundColor(.primary)
                     .minimumScaleFactor(0.7)
@@ -197,14 +197,14 @@ struct OpportunityDetailView: View {
                 .frame(width: 1, height: ResponsiveLayout.iconSize)
             
             VStack(spacing: ResponsiveLayout.smallSpacing) {
-                Text("TERM")
+                Text(LocalizedStrings.get("detail.term"))
                     .font(.system(size: ResponsiveLayout.captionSize - 2, weight: .semibold))
                     .foregroundColor(.secondary)
                     .tracking(0.5)
                     .minimumScaleFactor(0.7)
                     .lineLimit(1)
                 
-                Text("5 Years")
+                Text(LocalizedStrings.get("detail.years"))
                     .font(.system(size: ResponsiveLayout.subtitleSize, weight: .bold))
                     .foregroundColor(.primary)
                     .minimumScaleFactor(0.7)
@@ -219,14 +219,14 @@ struct OpportunityDetailView: View {
     private var fundingProgressSection: some View {
         VStack(alignment: .leading, spacing: ResponsiveLayout.baseSpacing) {
             HStack {
-                Text("Funding Progress")
+                Text(LocalizedStrings.get("detail.fundingProgress"))
                     .font(.system(size: ResponsiveLayout.subtitleSize, weight: .bold))
                     .minimumScaleFactor(0.8)
                     .lineLimit(1)
                 
                 Spacer()
                 
-                Text("\(Int(100 - opportunity.fundedPercentage))% Available")
+                Text("\(Int(100 - opportunity.fundedPercentage))\(LocalizedStrings.get("detail.available"))")
                     .font(.system(size: 11, weight: .bold))
                     .foregroundColor(.white)
                     .padding(.horizontal, 12)
@@ -261,17 +261,19 @@ struct OpportunityDetailView: View {
             .frame(height: 12)
             
             HStack {
-                Text("Funded: \(String(format: "%.1fM", opportunity.targetAmount * opportunity.fundedPercentage / 100)) SAR")
-                    .font(.system(size: 12, weight: .semibold))
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.7)
+                HStack(spacing: 4) {
+                    Text(LocalizedStrings.get("card.funded") + ": " + String(format: "%.1fM", opportunity.targetAmount * opportunity.fundedPercentage / 100))
+                        .font(.system(size: 12, weight: .semibold))
+                    CurrencyView(size: 10, color: .primary)
+                }
                 
                 Spacer(minLength: 8)
                 
-                Text("Target: \(String(format: "%.0f,000,000", opportunity.targetAmount)) SAR")
-                    .font(.system(size: 12, weight: .semibold))
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.7)
+                HStack(spacing: 4) {
+                    Text(LocalizedStrings.get("card.target") + ": " + String(format: "%.0f,000,000", opportunity.targetAmount))
+                        .font(.system(size: 12, weight: .semibold))
+                    CurrencyView(size: 10, color: .primary)
+                }
             }
             .foregroundColor(.primary)
         }
@@ -292,7 +294,7 @@ struct OpportunityDetailView: View {
             HStack(spacing: 4) {
                 Image(systemName: "eye")
                     .font(.system(size: 14))
-                Text("241 investors viewed this today")
+                Text("241 \(LocalizedStrings.get("detail.viewers"))")
                     .font(.system(size: 14, weight: .medium))
             }
             .foregroundColor(.secondary)
@@ -307,13 +309,13 @@ struct OpportunityDetailView: View {
     private var calculatorCard: some View {
         VStack(alignment: .leading, spacing: 18) {
             HStack(alignment: .firstTextBaseline, spacing: 4) {
-                Text(String(format: "%.0f", projectedValue))
-                    .font(.system(size: 36, weight: .bold))
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.7)
-                Text("SAR")
-                    .font(.system(size: 14, weight: .semibold))
-                    .foregroundColor(.secondary)
+                CurrencyText(
+                    amount: String(format: "%.0f", projectedValue),
+                    amountSize: 36,
+                    logoSize: 28,
+                    color: .primary,
+                    weight: .bold
+                )
                 
                 Spacer()
                 
@@ -332,24 +334,30 @@ struct OpportunityDetailView: View {
             
             HStack(spacing: 12) {
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("Annual Income")
+                    Text(LocalizedStrings.get("detail.annualIncome"))
                         .font(.system(size: 11))
                         .foregroundColor(.secondary)
-                    Text("\(String(format: "%.0f", annualIncome)) SAR")
-                        .font(.system(size: 15, weight: .bold))
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.8)
+                    CurrencyText(
+                        amount: String(format: "%.0f", annualIncome),
+                        amountSize: 15,
+                        logoSize: 12,
+                        color: .primary,
+                        weight: .bold
+                    )
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 
                 VStack(alignment: .trailing, spacing: 4) {
-                    Text("Appreciation")
+                    Text(LocalizedStrings.get("detail.appreciation"))
                         .font(.system(size: 11))
                         .foregroundColor(.secondary)
-                    Text("\(String(format: "%.0f", appreciation)) SAR")
-                        .font(.system(size: 15, weight: .bold))
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.8)
+                    CurrencyText(
+                        amount: String(format: "%.0f", appreciation),
+                        amountSize: 15,
+                        logoSize: 12,
+                        color: .primary,
+                        weight: .bold
+                    )
                 }
                 .frame(maxWidth: .infinity, alignment: .trailing)
             }
@@ -367,15 +375,13 @@ struct OpportunityDetailView: View {
                         .background(Color(UIColor.systemGray6).cornerRadius(22))
                 }
                 
-                HStack(spacing: 4) {
-                    Text("\(String(format: "%.0f", investmentAmount))")
-                        .font(.system(size: 18, weight: .bold))
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.8)
-                    Text("SAR")
-                        .font(.system(size: 13, weight: .medium))
-                        .foregroundColor(.secondary)
-                }
+                CurrencyText(
+                    amount: String(format: "%.0f", investmentAmount),
+                    amountSize: 18,
+                    logoSize: 15,
+                    color: .primary,
+                    weight: .bold
+                )
                 .frame(maxWidth: .infinity)
                 
                 Button(action: {
@@ -399,13 +405,13 @@ struct OpportunityDetailView: View {
         .padding(18)
         .background(Color(UIColor.systemBackground))
         .cornerRadius(20)
-        .shadow(color: Color.black.opacity(0.08), radius: 12, x: 0, y: 4)
+        .shadow(color: Color.primary.opacity(0.15), radius: 12, x: 0, y: 4)
     }
     
     // MARK: - Timeline Section
     private var timelineSection: some View {
         VStack(alignment: .leading, spacing: 16) {
-            Text("Investment Timeline")
+            Text(LocalizedStrings.get("detail.timeline"))
                 .font(.system(size: 20, weight: .bold))
             
             ForEach(Array(TimelineItem.mockTimeline.enumerated()), id: \.element.id) { index, item in
@@ -417,7 +423,7 @@ struct OpportunityDetailView: View {
     // MARK: - Due Diligence Section
     private var dueDiligenceSection: some View {
         VStack(alignment: .leading, spacing: 16) {
-            Text("Due Diligence")
+            Text(LocalizedStrings.get("detail.dueDiligence"))
                 .font(.system(size: 20, weight: .bold))
             
             HStack(spacing: 16) {
@@ -426,7 +432,7 @@ struct OpportunityDetailView: View {
                         .font(.system(size: 36))
                         .foregroundColor(.primary)
                     
-                    Text("CMA REGULATED")
+                    Text(LocalizedStrings.get("detail.cmaRegulated"))
                         .font(.system(size: 10, weight: .bold))
                         .multilineTextAlignment(.center)
                         .lineLimit(2)
@@ -442,7 +448,7 @@ struct OpportunityDetailView: View {
                         .font(.system(size: 36))
                         .foregroundColor(.orange)
                     
-                    Text("SHARIAH\nCOMPLIANT")
+                    Text(LocalizedStrings.get("detail.shariahCompliant"))
                         .font(.system(size: 10, weight: .bold))
                         .multilineTextAlignment(.center)
                         .lineLimit(2)
@@ -467,10 +473,10 @@ struct OpportunityDetailView: View {
                 }
                 
                 VStack(alignment: .leading, spacing: 6) {
-                    Text("Arch Capital")
+                    Text(LocalizedStrings.get("company.archCapital"))
                         .font(.system(size: 16, weight: .bold))
                     
-                    Text("Established in 2020, a CMA-licensed investment firm specializing in industrial logistics assets across the GCC region.")
+                    Text(LocalizedStrings.get("company.archCapitalDesc"))
                         .font(.system(size: 13))
                         .foregroundColor(.secondary)
                         .fixedSize(horizontal: false, vertical: true)
@@ -546,30 +552,26 @@ struct OpportunityDetailView: View {
     private var bottomActionBar: some View {
         HStack(spacing: ResponsiveLayout.baseSpacing) {
             VStack(alignment: .leading, spacing: ResponsiveLayout.smallSpacing) {
-                Text("MIN INVESTMENT")
+                Text(LocalizedStrings.get("detail.minInvestment"))
                     .font(.system(size: ResponsiveLayout.captionSize - 2, weight: .semibold))
                     .foregroundColor(.secondary)
                     .tracking(0.5)
                     .minimumScaleFactor(0.7)
                     .lineLimit(1)
                 
-                HStack(spacing: ResponsiveLayout.smallSpacing) {
-                    Text("\(String(format: "%d", opportunity.minInvestment))")
-                        .font(.system(size: ResponsiveLayout.subtitleSize, weight: .bold))
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.7)
-                    Text("SAR")
-                        .font(.system(size: ResponsiveLayout.bodySize, weight: .semibold))
-                        .foregroundColor(.secondary)
-                        .minimumScaleFactor(0.7)
-                        .lineLimit(1)
-                }
+                CurrencyText(
+                    amount: String(format: "%d", opportunity.minInvestment),
+                    amountSize: ResponsiveLayout.subtitleSize,
+                    logoSize: ResponsiveLayout.bodySize,
+                    color: .primary,
+                    weight: .bold
+                )
             }
             
             Spacer(minLength: ResponsiveLayout.smallSpacing)
             
             Button(action: {}) {
-                Text("Add to Cart")
+                Text(LocalizedStrings.get("detail.addToCart"))
                     .font(.system(size: ResponsiveLayout.bodySize, weight: .bold))
                     .foregroundColor(.white)
                     .padding(.horizontal, ResponsiveLayout.horizontalPadding)
@@ -629,7 +631,7 @@ struct TimelineRow: View {
                         .foregroundColor(.primary)
                     
                     if item.status == .current {
-                        Text("CURRENT")
+                        Text(LocalizedStrings.get("detail.current"))
                             .font(.system(size: 9, weight: .bold))
                             .foregroundColor(.orange)
                             .padding(.horizontal, 8)

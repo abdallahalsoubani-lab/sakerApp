@@ -17,11 +17,20 @@ enum PropertyType: String, CaseIterable, Identifiable {
     var id: String { self.rawValue }
     
     var displayName: String {
-        return rawValue
+        switch self {
+        case .all:
+            return LocalizedStrings.get("property.all")
+        case .residential:
+            return LocalizedStrings.get("property.residential")
+        case .commercial:
+            return LocalizedStrings.get("property.commercial")
+        case .industrial:
+            return LocalizedStrings.get("property.industrial")
+        }
     }
     
     var tagName: String {
-        return rawValue.uppercased()
+        return displayName.uppercased()
     }
 }
 
@@ -81,8 +90,8 @@ extension InvestmentOpportunity {
     static var mockData: [InvestmentOpportunity] {
         return [
             InvestmentOpportunity(
-                title: "Riyadh Logistics Center 04",
-                location: "Industrial Zone 2, Riyadh",
+                title: LocalizedStrings.get("opportunity.riyadh"),
+                location: LocalizedStrings.get("opportunity.riyadhLocation"),
                 type: .industrial,
                 imageName: "construction_site",
                 returnRate: 8.66,
@@ -92,8 +101,8 @@ extension InvestmentOpportunity {
                 targetAmount: 40.0
             ),
             InvestmentOpportunity(
-                title: "Jeddah Corniche Heights",
-                location: "North Corniche, Jeddah",
+                title: LocalizedStrings.get("opportunity.jeddah"),
+                location: LocalizedStrings.get("opportunity.jeddahLocation"),
                 type: .residential,
                 imageName: "jeddah_aerial",
                 returnRate: 6.2,
@@ -103,8 +112,8 @@ extension InvestmentOpportunity {
                 targetAmount: 25.0
             ),
             InvestmentOpportunity(
-                title: "Downtown Dubai Offices",
-                location: "Business Bay, Dubai",
+                title: LocalizedStrings.get("opportunity.dubai"),
+                location: LocalizedStrings.get("opportunity.dubaiLocation"),
                 type: .commercial,
                 imageName: "dubai_offices",
                 returnRate: 7.1,
@@ -114,8 +123,8 @@ extension InvestmentOpportunity {
                 targetAmount: 60.0
             ),
             InvestmentOpportunity(
-                title: "Dammam Warehousing Complex",
-                location: "Dammam Port, KSA",
+                title: LocalizedStrings.get("opportunity.dammam"),
+                location: LocalizedStrings.get("opportunity.dammamLocation"),
                 type: .industrial,
                 imageName: "warehouse_industrial",
                 returnRate: 9.15,

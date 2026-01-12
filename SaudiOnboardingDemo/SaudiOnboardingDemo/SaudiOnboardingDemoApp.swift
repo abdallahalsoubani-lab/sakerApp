@@ -11,15 +11,23 @@ import Combine
 
 @main
 struct SaudiOnboardingDemoApp: App {
+    @StateObject private var localizationManager = LocalizationManager.shared
+    @StateObject private var themeManager = ThemeManager.shared
+    
     var body: some Scene {
         WindowGroup {
-            RootTabView()
+            LaunchScreenView()
+                .environmentObject(localizationManager)
+                .environmentObject(themeManager)
+                .environment(\.layoutDirection, localizationManager.currentLanguage.isRTL ? .rightToLeft : .leftToRight)
+                .preferredColorScheme(themeManager.currentTheme == .light ? .light : themeManager.currentTheme == .dark ? .dark : nil)
         }
     }
 }
 
 // MARK: - Root Tab View
 struct RootTabView: View {
+    @EnvironmentObject var localizationManager: LocalizationManager
     @State private var selectedTab: Int = 0
     @State private var hideTabBar: Bool = false
     
@@ -82,11 +90,11 @@ struct OpportunitiesViewContent: View {
     private var headerSection: some View {
         HStack {
             VStack(alignment: .leading, spacing: 4) {
-                Text("Opportunities")
+                Text(LocalizedStrings.get("opportunities.title"))
                     .font(.system(size: 32, weight: .bold))
                     .foregroundColor(.primary)
                 
-                Text("Explore vetted real estate assets")
+                Text(LocalizedStrings.get("opportunities.subtitle"))
                     .font(.system(size: 15))
                     .foregroundColor(.secondary)
             }
@@ -112,7 +120,7 @@ struct OpportunitiesViewContent: View {
                 .foregroundColor(.gray)
                 .font(.system(size: 18))
             
-            TextField("Search location or asset...", text: $viewModel.searchText)
+            TextField(LocalizedStrings.get("opportunities.search"), text: $viewModel.searchText)
                 .font(.system(size: 16))
         }
         .padding(.horizontal, 16)
@@ -185,6 +193,15 @@ enum TransactionType {
 enum TransactionStatus: String {
     case completed = "Completed"
     case processing = "Processing"
+    
+    var localizedString: String {
+        switch self {
+        case .completed:
+            return LocalizedStrings.get("status.completed")
+        case .processing:
+            return LocalizedStrings.get("status.processing")
+        }
+    }
 }
 
 // MARK: - Transaction Model
@@ -198,7 +215,11 @@ struct Transaction: Identifiable {
     
     var formattedAmount: String {
         let prefix = amount >= 0 ? "+" : "-"
-        return "\(prefix) \(String(format: "%.0f", abs(amount))) SAR"
+        return "\(prefix) \(String(format: "%.0f", abs(amount)))"
+    }
+    
+    var amountColor: Color {
+        return amount >= 0 ? .orange : .primary
     }
     
     var formattedDate: String {
@@ -206,14 +227,15 @@ struct Transaction: Identifiable {
         let calendar = Calendar.current
         
         if calendar.isDateInToday(date) {
-            formatter.dateFormat = "'Today,' h:mm a"
+            formatter.dateFormat = "h:mm a"
+            return "\(LocalizedStrings.get("date.today")), \(formatter.string(from: date))"
         } else if calendar.isDateInYesterday(date) {
-            formatter.dateFormat = "'Yesterday,' h:mm a"
+            formatter.dateFormat = "h:mm a"
+            return "\(LocalizedStrings.get("date.yesterday")), \(formatter.string(from: date))"
         } else {
             formatter.dateFormat = "MMM d, yyyy"
+            return formatter.string(from: date)
         }
-        
-        return formatter.string(from: date)
     }
 }
 
@@ -234,28 +256,28 @@ class WalletViewModel: ObservableObject {
         
         transactions = [
             Transaction(
-                title: "Top Up via Apple Pay",
+                title: LocalizedStrings.get("transaction.topUp"),
                 amount: 5000,
                 date: now,
                 type: .topUp,
                 status: .completed
             ),
             Transaction(
-                title: "Investment: Riyadh Logistics",
+                title: LocalizedStrings.get("transaction.investment"),
                 amount: -25000,
                 date: calendar.date(byAdding: .day, value: -1, to: now)!,
                 type: .investment,
                 status: .completed
             ),
             Transaction(
-                title: "Dividend Payment (Q4)",
+                title: LocalizedStrings.get("transaction.dividend"),
                 amount: 1250,
                 date: calendar.date(byAdding: .day, value: -7, to: now)!,
                 type: .dividend,
                 status: .completed
             ),
             Transaction(
-                title: "Withdrawal to SABB Bank",
+                title: LocalizedStrings.get("transaction.withdrawal"),
                 amount: -10000,
                 date: calendar.date(byAdding: .day, value: -8, to: now)!,
                 type: .withdrawal,
@@ -290,7 +312,7 @@ struct WalletView: View {
     
     private var headerSection: some View {
         HStack {
-            Text("Wallet")
+            Text(LocalizedStrings.get("wallet.title"))
                 .font(.system(size: 32, weight: .bold))
             
             Spacer()
@@ -306,18 +328,17 @@ struct WalletView: View {
     private var balanceCard: some View {
         VStack(alignment: .leading, spacing: 20) {
             VStack(alignment: .leading, spacing: 8) {
-                Text("Total Balance")
+                Text(LocalizedStrings.get("wallet.totalBalance"))
                     .font(.system(size: 15, weight: .medium))
                     .foregroundColor(.white.opacity(0.7))
                 
-                HStack(alignment: .firstTextBaseline, spacing: 4) {
-                    Text(String(format: "%.2f", viewModel.totalBalance))
-                        .font(.system(size: 48, weight: .bold))
-                        .foregroundColor(.white)
-                    Text("SAR")
-                        .font(.system(size: 18, weight: .semibold))
-                        .foregroundColor(.white.opacity(0.7))
-                }
+                CurrencyText(
+                    amount: String(format: "%.2f", viewModel.totalBalance),
+                    amountSize: 48,
+                    logoSize: 36,
+                    color: .white,
+                    weight: .bold
+                )
             }
             
             HStack(spacing: 12) {
@@ -325,7 +346,7 @@ struct WalletView: View {
                     HStack(spacing: 8) {
                         Image(systemName: "plus")
                             .font(.system(size: 16, weight: .bold))
-                        Text("Top Up")
+                        Text(LocalizedStrings.get("wallet.topUp"))
                             .font(.system(size: 16, weight: .bold))
                     }
                     .foregroundColor(.black)
@@ -345,7 +366,7 @@ struct WalletView: View {
                     HStack(spacing: 8) {
                         Image(systemName: "arrow.down.left")
                             .font(.system(size: 16, weight: .bold))
-                        Text("Withdraw")
+                        Text(LocalizedStrings.get("wallet.withdraw"))
                             .font(.system(size: 16, weight: .bold))
                     }
                     .foregroundColor(.white)
@@ -371,11 +392,16 @@ struct WalletView: View {
     private var statsCards: some View {
         HStack(spacing: 16) {
             VStack(alignment: .leading, spacing: 8) {
-                Text("Available to Invest")
+                Text(LocalizedStrings.get("wallet.availableToInvest"))
                     .font(.system(size: 13, weight: .medium))
                     .foregroundColor(.secondary)
-                Text("\(String(format: "%.0f", viewModel.availableToInvest)) SAR")
-                    .font(.system(size: 22, weight: .bold))
+                CurrencyText(
+                    amount: String(format: "%.0f", viewModel.availableToInvest),
+                    amountSize: 22,
+                    logoSize: 18,
+                    color: .primary,
+                    weight: .bold
+                )
             }
             .padding(20)
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -384,11 +410,16 @@ struct WalletView: View {
             .shadow(color: .black.opacity(0.05), radius: 8, x: 0, y: 2)
             
             VStack(alignment: .leading, spacing: 8) {
-                Text("Total Invested")
+                Text(LocalizedStrings.get("wallet.totalInvested"))
                     .font(.system(size: 13, weight: .medium))
                     .foregroundColor(.secondary)
-                Text("\(String(format: "%.0f", viewModel.totalInvested)) SAR")
-                    .font(.system(size: 22, weight: .bold))
+                CurrencyText(
+                    amount: String(format: "%.0f", viewModel.totalInvested),
+                    amountSize: 22,
+                    logoSize: 18,
+                    color: .primary,
+                    weight: .bold
+                )
             }
             .padding(20)
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -400,7 +431,7 @@ struct WalletView: View {
     
     private var transactionsSection: some View {
         VStack(alignment: .leading, spacing: 16) {
-            Text("Recent Transactions")
+            Text(LocalizedStrings.get("wallet.recentTransactions"))
                 .font(.system(size: 22, weight: .bold))
             
             VStack(spacing: 0) {
@@ -444,10 +475,14 @@ struct TransactionRow: View {
             Spacer()
             
             VStack(alignment: .trailing, spacing: 4) {
-                Text(transaction.formattedAmount)
-                    .font(.system(size: 16, weight: .bold))
-                    .foregroundColor(transaction.amount >= 0 ? .orange : .primary)
-                Text(transaction.status.rawValue)
+                CurrencyText(
+                    amount: transaction.formattedAmount,
+                    amountSize: 16,
+                    logoSize: 14,
+                    color: transaction.amountColor,
+                    weight: .bold
+                )
+                Text(transaction.status.localizedString)
                     .font(.system(size: 12, weight: .medium))
                     .foregroundColor(.secondary)
             }
@@ -477,6 +512,8 @@ struct TransactionRow: View {
 
 // MARK: - Profile View
 struct ProfilePlaceholderView: View {
+    @EnvironmentObject var localizationManager: LocalizationManager
+    @EnvironmentObject var themeManager: ThemeManager
     private let gutter: CGFloat = 20
     
     var body: some View {
@@ -485,37 +522,42 @@ struct ProfilePlaceholderView: View {
                 // Profile Header
                 profileHeader
                 
+                // Language Switcher Button (Added at top)
+                languageSwitcherButton
+                
+                // Theme Switcher Button (Dark Mode)
+                themeSwitcherButton
+                
                 // Account Verified Banner
                 verifiedBanner
                 
                 // Account Settings
                 settingsSection(
-                    title: "ACCOUNT SETTINGS",
+                    title: LocalizedStrings.get("profile.accountSettings"),
                     items: [
-                        ("person", "Personal Information", nil),
-                        ("bell", "Notifications", nil),
-                        ("globe", "Language", "English"),
-                        ("gearshape", "Preferences", nil)
+                        ("person", LocalizedStrings.get("profile.personalInfo"), nil),
+                        ("bell", LocalizedStrings.get("profile.notifications"), nil),
+                        ("gearshape", LocalizedStrings.get("profile.preferences"), nil)
                     ]
                 )
                 
                 // Financial
                 settingsSection(
-                    title: "FINANCIAL",
+                    title: LocalizedStrings.get("profile.financial"),
                     items: [
-                        ("creditcard", "Payment Methods", nil),
-                        ("doc.text", "Documents & Statements", nil),
-                        ("doc.text", "Tax Reports", nil)
+                        ("creditcard", LocalizedStrings.get("profile.paymentMethods"), nil),
+                        ("doc.text", LocalizedStrings.get("profile.documents"), nil),
+                        ("doc.text", LocalizedStrings.get("profile.taxReports"), nil)
                     ]
                 )
                 
                 // Support & Legal
                 settingsSection(
-                    title: "SUPPORT & LEGAL",
+                    title: LocalizedStrings.get("profile.supportLegal"),
                     items: [
-                        ("questionmark.circle", "Help Center", nil),
-                        ("doc.text", "Terms & Conditions", nil),
-                        ("doc.text", "Privacy Policy", nil)
+                        ("questionmark.circle", LocalizedStrings.get("profile.helpCenter"), nil),
+                        ("doc.text", LocalizedStrings.get("profile.terms"), nil),
+                        ("doc.text", LocalizedStrings.get("profile.privacy"), nil)
                     ]
                 )
                 
@@ -552,16 +594,16 @@ struct ProfilePlaceholderView: View {
             
             // Name and Email
             VStack(spacing: 6) {
-                Text("Faisal Al-Saud")
+                Text(LocalizedStrings.get("profile.name"))
                     .font(.system(size: 24, weight: .bold))
                     .foregroundColor(.primary)
                 
                 HStack(spacing: 8) {
-                    Text("faisal@example.com")
+                    Text(LocalizedStrings.get("profile.email"))
                         .font(.system(size: 14))
                         .foregroundColor(.secondary)
                     
-                    Text("ACCREDITED")
+                    Text(LocalizedStrings.get("profile.accredited"))
                         .font(.system(size: 10, weight: .bold))
                         .foregroundColor(Color(red: 0.65, green: 0.55, blue: 0.25))
                         .padding(.horizontal, 8)
@@ -574,6 +616,84 @@ struct ProfilePlaceholderView: View {
         .padding(.vertical, 20)
     }
     
+    private var languageSwitcherButton: some View {
+        Button(action: {
+            localizationManager.toggleLanguage()
+        }) {
+            HStack(spacing: 12) {
+                Image(systemName: "globe")
+                    .font(.system(size: 24))
+                    .foregroundColor(.white)
+                
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(LocalizedStrings.get("profile.language"))
+                        .font(.system(size: 15, weight: .bold))
+                        .foregroundColor(.white)
+                    
+                    Text(localizationManager.currentLanguage.displayName)
+                        .font(.system(size: 13))
+                        .foregroundColor(.white.opacity(0.8))
+                }
+                
+                Spacer()
+                
+                Image(systemName: "arrow.left.arrow.right")
+                    .font(.system(size: 18, weight: .semibold))
+                    .foregroundColor(.white)
+            }
+            .padding(16)
+            .background(
+                LinearGradient(
+                    colors: [Color(red: 0.85, green: 0.75, blue: 0.45), Color(red: 0.75, green: 0.65, blue: 0.35)],
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
+            )
+            .cornerRadius(16)
+            .shadow(color: Color.primary.opacity(0.2), radius: 8, x: 0, y: 4)
+        }
+    }
+    
+    private var themeSwitcherButton: some View {
+        Button(action: {
+            themeManager.toggleTheme()
+        }) {
+            HStack(spacing: 12) {
+                Image(systemName: themeManager.currentTheme.icon)
+                    .font(.system(size: 24))
+                    .foregroundColor(.white)
+                
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(LocalizedStrings.get("theme.title"))
+                        .font(.system(size: 15, weight: .bold))
+                        .foregroundColor(.white)
+                    
+                    Text(themeManager.currentTheme.displayName)
+                        .font(.system(size: 13))
+                        .foregroundColor(.white.opacity(0.8))
+                }
+                
+                Spacer()
+                
+                Image(systemName: themeManager.currentTheme == .dark ? "moon.fill" : "sun.max.fill")
+                    .font(.system(size: 18, weight: .semibold))
+                    .foregroundColor(.white)
+            }
+            .padding(16)
+            .background(
+                LinearGradient(
+                    colors: themeManager.currentTheme == .dark ? 
+                        [Color(red: 0.2, green: 0.2, blue: 0.3), Color(red: 0.1, green: 0.1, blue: 0.2)] :
+                        [Color(red: 0.3, green: 0.5, blue: 0.9), Color(red: 0.2, green: 0.4, blue: 0.8)],
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
+            )
+            .cornerRadius(16)
+            .shadow(color: Color.primary.opacity(0.2), radius: 8, x: 0, y: 4)
+        }
+    }
+    
     private var verifiedBanner: some View {
         HStack(spacing: 12) {
             Image(systemName: "checkmark.shield.fill")
@@ -581,11 +701,11 @@ struct ProfilePlaceholderView: View {
                 .foregroundColor(Color(red: 0.85, green: 0.75, blue: 0.45))
             
             VStack(alignment: .leading, spacing: 4) {
-                Text("Account Verified")
+                Text(LocalizedStrings.get("profile.verified"))
                     .font(.system(size: 15, weight: .bold))
                     .foregroundColor(.primary)
                 
-                Text("Your KYC is complete and up to date.")
+                Text(LocalizedStrings.get("profile.verifiedDesc"))
                     .font(.system(size: 13))
                     .foregroundColor(.secondary)
             }
@@ -658,7 +778,7 @@ struct ProfilePlaceholderView: View {
                 Image(systemName: "rectangle.portrait.and.arrow.right")
                     .font(.system(size: 18, weight: .semibold))
                 
-                Text("Log Out")
+                Text(LocalizedStrings.get("profile.logout"))
                     .font(.system(size: 16, weight: .semibold))
             }
             .foregroundColor(.red)

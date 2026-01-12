@@ -35,27 +35,27 @@ extension TimelineItem {
     static var mockTimeline: [TimelineItem] {
         return [
             TimelineItem(
-                title: "Fundraising Period",
+                title: LocalizedStrings.get("timeline.fundraising"),
                 date: "Nov 2025 - Dec 2025",
-                description: "Initial capital raising phase.",
+                description: LocalizedStrings.get("timeline.fundraisingDesc"),
                 status: .completed
             ),
             TimelineItem(
-                title: "Property Acquisition",
+                title: LocalizedStrings.get("timeline.acquisition"),
                 date: "Jan 15, 2026",
-                description: "Asset transfer and registration.",
+                description: LocalizedStrings.get("timeline.acquisitionDesc"),
                 status: .current
             ),
             TimelineItem(
-                title: "First Dividend",
+                title: LocalizedStrings.get("timeline.firstDividend"),
                 date: "Feb 28, 2026",
-                description: "Expected first monthly payout.",
+                description: LocalizedStrings.get("timeline.firstDividendDesc"),
                 status: .upcoming
             ),
             TimelineItem(
-                title: "Exit Strategy",
+                title: LocalizedStrings.get("timeline.exitStrategy"),
                 date: "Q4 2030",
-                description: "Projected sale or refinancing.",
+                description: LocalizedStrings.get("timeline.exitStrategyDesc"),
                 status: .upcoming
             )
         ]
@@ -65,10 +65,10 @@ extension TimelineItem {
 extension DocumentItem {
     static var mockDocuments: [DocumentItem] {
         return [
-            DocumentItem(title: "Fund Memo EN", icon: "doc.text"),
-            DocumentItem(title: "Executive Summary", icon: "doc.text"),
-            DocumentItem(title: "Shariah Certificate", icon: "doc.text"),
-            DocumentItem(title: "Valuation Report", icon: "doc.text")
+            DocumentItem(title: LocalizedStrings.get("doc.fundMemo"), icon: "doc.text"),
+            DocumentItem(title: LocalizedStrings.get("doc.executiveSummary"), icon: "doc.text"),
+            DocumentItem(title: LocalizedStrings.get("doc.shariahCert"), icon: "doc.text"),
+            DocumentItem(title: LocalizedStrings.get("doc.valuationReport"), icon: "doc.text")
         ]
     }
 }

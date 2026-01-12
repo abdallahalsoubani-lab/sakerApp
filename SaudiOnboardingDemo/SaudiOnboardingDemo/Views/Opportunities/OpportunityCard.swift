@@ -24,7 +24,7 @@ struct OpportunityCard: View {
         }
         .background(Color(UIColor.systemBackground))
         .cornerRadius(20)
-        .shadow(color: Color.black.opacity(0.08), radius: 12, x: 0, y: 4)
+        .shadow(color: Color.primary.opacity(0.15), radius: 12, x: 0, y: 4)
     }
     
     // MARK: - Image Section
@@ -64,7 +64,7 @@ struct OpportunityCard: View {
                     
                     // Coming Soon Badge
                     if opportunity.status == .comingSoon {
-                        Text("COMING SOON")
+                        Text(LocalizedStrings.get("status.comingSoon"))
                             .font(.system(size: 11, weight: .bold))
                             .foregroundColor(.white)
                             .padding(.horizontal, 14)
@@ -118,7 +118,7 @@ struct OpportunityCard: View {
         HStack(spacing: 0) {
             // Return
             VStack(alignment: .leading, spacing: 6) {
-                Text("RETURN")
+                Text(LocalizedStrings.get("card.return"))
                     .font(.system(size: 11, weight: .semibold))
                     .foregroundColor(.secondary)
                     .tracking(0.5)
@@ -132,7 +132,7 @@ struct OpportunityCard: View {
             
             // Yield
             VStack(alignment: .center, spacing: 6) {
-                Text("YIELD")
+                Text(LocalizedStrings.get("card.yield"))
                     .font(.system(size: 11, weight: .semibold))
                     .foregroundColor(.secondary)
                     .tracking(0.5)
@@ -146,7 +146,7 @@ struct OpportunityCard: View {
             
             // Min Investment
             VStack(alignment: .trailing, spacing: 6) {
-                Text("MIN INV")
+                Text(LocalizedStrings.get("card.minInv"))
                     .font(.system(size: 11, weight: .semibold))
                     .foregroundColor(.secondary)
                     .tracking(0.5)
@@ -163,7 +163,7 @@ struct OpportunityCard: View {
         VStack(spacing: 10) {
             if opportunity.status == .comingSoon {
                 // Coming Soon Message
-                Text("Opens for funding in \(opportunity.comingSoonDays ?? 0) days")
+                Text(String(format: LocalizedStrings.get("card.comingSoon"), opportunity.comingSoonDays ?? 0))
                     .font(.system(size: 13, weight: .medium))
                     .foregroundColor(.secondary)
                     .frame(maxWidth: .infinity, alignment: .center)
@@ -171,13 +171,13 @@ struct OpportunityCard: View {
             } else {
                 // Progress Bar and Info
                 HStack(spacing: 0) {
-                    Text("Funded: \(Int(opportunity.fundedPercentage))%")
+                    Text("\(LocalizedStrings.get("card.funded")): \(Int(opportunity.fundedPercentage))%")
                         .font(.system(size: 13, weight: .semibold))
                         .foregroundColor(.primary)
                     
                     Spacer()
                     
-                    Text("Target: \(String(format: "%.1fM", opportunity.targetAmount))")
+                    Text("\(LocalizedStrings.get("card.target")): \(String(format: "%.1fM", opportunity.targetAmount))")
                         .font(.system(size: 13, weight: .semibold))
                         .foregroundColor(.primary)
                 }

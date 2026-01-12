@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		1B2F862B2F14377A00AA55E3 /* ResponsiveLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B2F862A2F14377A00AA55E3 /* ResponsiveLayout.swift */; };
+		1B2F86332F15419A00AA55E3 /* LocalizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B2F86322F15419A00AA55E3 /* LocalizationManager.swift */; };
+		1B2F86352F15428500AA55E3 /* LaunchScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B2F86342F15428500AA55E3 /* LaunchScreenView.swift */; };
+		1B2F86372F1544EE00AA55E3 /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B2F86362F1544EE00AA55E3 /* ThemeManager.swift */; };
+		1B2F864A2F1545FC00AA55E3 /* CurrencyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B2F86492F1545FC00AA55E3 /* CurrencyView.swift */; };
 		AA0001 /* SaudiOnboardingDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0002 /* SaudiOnboardingDemoApp.swift */; };
 		AA0003 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0004 /* ContentView.swift */; };
 		AA0005 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA0006 /* Assets.xcassets */; };
@@ -51,6 +55,10 @@
 
 /* Begin PBXFileReference section */
 		1B2F862A2F14377A00AA55E3 /* ResponsiveLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponsiveLayout.swift; sourceTree = "<group>"; };
+		1B2F86322F15419A00AA55E3 /* LocalizationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationManager.swift; sourceTree = "<group>"; };
+		1B2F86342F15428500AA55E3 /* LaunchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenView.swift; sourceTree = "<group>"; };
+		1B2F86362F1544EE00AA55E3 /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
+		1B2F86492F1545FC00AA55E3 /* CurrencyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyView.swift; sourceTree = "<group>"; };
 		AA0002 /* SaudiOnboardingDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaudiOnboardingDemoApp.swift; sourceTree = "<group>"; };
 		AA0004 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		AA0006 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -159,6 +167,8 @@
 		AA0065 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				1B2F86362F1544EE00AA55E3 /* ThemeManager.swift */,
+				1B2F86322F15419A00AA55E3 /* LocalizationManager.swift */,
 				1B2F862A2F14377A00AA55E3 /* ResponsiveLayout.swift */,
 				AA0010 /* Constants.swift */,
 				AA0012 /* RegexPatterns.swift */,
@@ -170,9 +180,10 @@
 		AA0066 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				AA0068 /* Components */,
+				1B2F86342F15428500AA55E3 /* LaunchScreenView.swift */,
 				AA0004 /* ContentView.swift */,
 				AA0056 /* SuccessView.swift */,
-				AA0068 /* Components */,
 				AA0069 /* Steps */,
 				AA1FE1A1 /* Opportunities */,
 				AAF1D7DD /* OpportunityDetail */,
@@ -192,6 +203,7 @@
 		AA0068 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				1B2F86492F1545FC00AA55E3 /* CurrencyView.swift */,
 				AA0026 /* ProgressBar.swift */,
 				AA0028 /* CustomButton.swift */,
 				AA0030 /* CustomTextField.swift */,
@@ -334,15 +346,19 @@
 				AA0025 /* ProgressBar.swift in Sources */,
 				AA0027 /* CustomButton.swift in Sources */,
 				AA0029 /* CustomTextField.swift in Sources */,
+				1B2F86332F15419A00AA55E3 /* LocalizationManager.swift in Sources */,
 				AA0031 /* CustomPicker.swift in Sources */,
+				1B2F86352F15428500AA55E3 /* LaunchScreenView.swift in Sources */,
 				AA0033 /* ImagePicker.swift in Sources */,
 				AA0035 /* MapView.swift in Sources */,
+				1B2F86372F1544EE00AA55E3 /* ThemeManager.swift in Sources */,
 				AA0037 /* Step0_PhoneOTPView.swift in Sources */,
 				AA0039 /* Step1_KYCBasicView.swift in Sources */,
 				AA0041 /* Step2_IDScanOCRView.swift in Sources */,
 				AA0043 /* Step3_NamesView.swift in Sources */,
 				AA0045 /* Step4_ContactMaritalView.swift in Sources */,
 				AA0047 /* Step5_JobIncomeView.swift in Sources */,
+				1B2F864A2F1545FC00AA55E3 /* CurrencyView.swift in Sources */,
 				AA0049 /* Step6_NationalAddressView.swift in Sources */,
 				AA0051 /* Step7_AccountDetailsView.swift in Sources */,
 				AA0053 /* Step8_LoginCredentialsView.swift in Sources */,

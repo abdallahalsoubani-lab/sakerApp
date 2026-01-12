@@ -15,11 +15,13 @@ struct BottomNavigationBar: View {
     var onTabSelected: ((Int) -> Void)? = nil
     
     // MARK: - Tab Items
-    private let tabs: [(icon: String, title: String)] = [
-        ("house.fill", "Invest"),
-        ("wallet.pass.fill", "Wallet"),
-        ("person.fill", "Profile")
-    ]
+    private var tabs: [(icon: String, title: String)] {
+        return [
+            ("house.fill", LocalizedStrings.get("nav.invest")),
+            ("wallet.pass.fill", LocalizedStrings.get("nav.wallet")),
+            ("person.fill", LocalizedStrings.get("nav.profile"))
+        ]
+    }
     
     // MARK: - Body
     var body: some View {
@@ -35,11 +37,11 @@ struct BottomNavigationBar: View {
                         VStack(spacing: 4) {
                             Image(systemName: tabs[index].icon)
                                 .font(.system(size: 24))
-                                .foregroundColor(selectedTab == index ? .black : .gray)
+                                .foregroundColor(selectedTab == index ? .primary : .gray)
                             
                             Text(tabs[index].title)
                                 .font(.system(size: 11, weight: .medium))
-                                .foregroundColor(selectedTab == index ? .black : .gray)
+                                .foregroundColor(selectedTab == index ? .primary : .gray)
                             
                             // Active Indicator
                             if selectedTab == index {
@@ -68,7 +70,7 @@ struct BottomNavigationBar: View {
         .background(
             Color(UIColor.systemBackground)
                 .ignoresSafeArea(edges: .bottom)
-                .shadow(color: Color.black.opacity(0.1), radius: 10, x: 0, y: -5)
+                .shadow(color: Color.primary.opacity(0.15), radius: 10, x: 0, y: -5)
         )
     }
 }
