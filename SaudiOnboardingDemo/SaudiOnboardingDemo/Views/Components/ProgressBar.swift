@@ -37,7 +37,7 @@ struct ProgressBar: View {
                 ZStack(alignment: .leading) {
                     // Background
                     Rectangle()
-                        .fill(Color.gray.opacity(0.2))
+                        .fill(Color(UIColor.systemGray5))
                         .frame(height: ResponsiveLayout.smallSpacing)
                         .cornerRadius(ResponsiveLayout.smallSpacing / 2)
 
@@ -59,8 +59,8 @@ struct ProgressBar: View {
         }
         .responsivePadding()
         .padding(.vertical, ResponsiveLayout.baseSpacing)
-        .background(Color.white)
-        .shadow(color: Color.black.opacity(ResponsiveLayout.shadowOpacity), radius: 2, y: 2)
+        .background(Color(UIColor.systemBackground))
+        .shadow(color: Color.primary.opacity(0.1), radius: 2, y: 2)
     }
 }
 

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject private var registrationData = RegistrationData()
+    @EnvironmentObject var navigationManager: NavigationManager
 
     var body: some View {
         VStack(spacing: 0) {
@@ -46,7 +47,8 @@ struct ContentView: View {
             }
             .environmentObject(registrationData)
         }
-        .preferredColorScheme(.light)
+        .environmentObject(ThemeManager.shared)
+        .environmentObject(LocalizationManager.shared)
         .onTapGesture {
             hideKeyboard()
         }

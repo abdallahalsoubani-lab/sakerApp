@@ -14,6 +14,7 @@ struct CustomTextField: View {
     var keyboardType: UIKeyboardType = .default
     var errorMessage: String? = nil
     var isDisabled: Bool = false
+    var showDoneButton: Bool = true
     @FocusState private var isFocused: Bool
 
     var body: some View {
@@ -30,7 +31,7 @@ struct CustomTextField: View {
                 .textFieldStyle(.plain)
                 .font(.system(size: ResponsiveLayout.bodySize))
                 .padding(ResponsiveLayout.baseSpacing)
-                .background(isDisabled ? Color.gray.opacity(0.1) : AppColors.background)
+                .background(isDisabled ? Color.gray.opacity(0.1) : AppColors.cardBackground)
                 .cornerRadius(ResponsiveLayout.cornerRadius)
                 .overlay(
                     RoundedRectangle(cornerRadius: ResponsiveLayout.cornerRadius)
@@ -39,13 +40,21 @@ struct CustomTextField: View {
                 .disabled(isDisabled)
                 .focused($isFocused)
                 .toolbar {
-                    ToolbarItemGroup(placement: .keyboard) {
-                        Spacer()
-                        Button("Done") {
-                            hideKeyboard()
+                    if showDoneButton && isFocused {
+                        ToolbarItemGroup(placement: .keyboard) {
+                            Spacer()
+                            Button(action: {
+                                hideKeyboard()
+                            }) {
+                                Text("تم")
+                                    .font(.system(size: 16, weight: .semibold))
+                                    .foregroundColor(AppColors.primary)
+                                    .padding(.horizontal, 16)
+                                    .padding(.vertical, 8)
+                                    .background(AppColors.primary.opacity(0.1))
+                                    .cornerRadius(8)
+                            }
                         }
-                        .font(.system(size: ResponsiveLayout.bodySize))
-                        .foregroundColor(AppColors.primary)
                     }
                 }
 
@@ -71,6 +80,7 @@ struct CustomSecureField: View {
     @Binding var text: String
     var placeholder: String = ""
     var errorMessage: String? = nil
+    var showDoneButton: Bool = true
     @FocusState private var isFocused: Bool
 
     var body: some View {
@@ -86,7 +96,7 @@ struct CustomSecureField: View {
                 .textFieldStyle(.plain)
                 .font(.system(size: ResponsiveLayout.bodySize))
                 .padding(ResponsiveLayout.baseSpacing)
-                .background(AppColors.background)
+                .background(AppColors.cardBackground)
                 .cornerRadius(ResponsiveLayout.cornerRadius)
                 .overlay(
                     RoundedRectangle(cornerRadius: ResponsiveLayout.cornerRadius)
@@ -94,13 +104,21 @@ struct CustomSecureField: View {
                 )
                 .focused($isFocused)
                 .toolbar {
-                    ToolbarItemGroup(placement: .keyboard) {
-                        Spacer()
-                        Button("Done") {
-                            hideKeyboard()
+                    if showDoneButton && isFocused {
+                        ToolbarItemGroup(placement: .keyboard) {
+                            Spacer()
+                            Button(action: {
+                                hideKeyboard()
+                            }) {
+                                Text("تم")
+                                    .font(.system(size: 16, weight: .semibold))
+                                    .foregroundColor(AppColors.primary)
+                                    .padding(.horizontal, 16)
+                                    .padding(.vertical, 8)
+                                    .background(AppColors.primary.opacity(0.1))
+                                    .cornerRadius(8)
+                            }
                         }
-                        .font(.system(size: ResponsiveLayout.bodySize))
-                        .foregroundColor(AppColors.primary)
                     }
                 }
 

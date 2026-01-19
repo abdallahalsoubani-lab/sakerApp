@@ -36,11 +36,11 @@ struct Step0_PhoneOTPView: View {
                 // Card
                 VStack(spacing: ResponsiveLayout.baseSpacing) {
                     // Phone Number
-                    CustomTextField(
-                        title: "رقم الجوال السعودي *",
-                        text: $registrationData.phoneNumber,
-                        placeholder: "05xxxxxxxx",
-                        keyboardType: .phonePad,
+                    CustomPhoneField(
+                        title: "رقم الجوال *",
+                        phoneNumber: $registrationData.phoneNumber,
+                        selectedCountry: $registrationData.selectedCountry,
+                        placeholder: "5xxxxxxxx",
                         errorMessage: phoneError
                     )
                     .onChange(of: registrationData.phoneNumber) { _, _ in
@@ -59,7 +59,7 @@ struct Step0_PhoneOTPView: View {
                                 Image(systemName: "checkmark.circle.fill")
                                     .foregroundColor(AppColors.success)
                                     .font(.system(size: ResponsiveLayout.bodySize))
-                                Text("تم إرسال رمز التحقق إلى \(registrationData.phoneNumber)")
+                                Text("تم إرسال رمز التحقق إلى \(registrationData.selectedCountry.dialCode) \(registrationData.phoneNumber)")
                                     .font(.system(size: ResponsiveLayout.captionSize))
                                     .foregroundColor(AppColors.textSecondary)
                                     .minimumScaleFactor(0.8)

@@ -12,6 +12,7 @@ struct MapView: View {
     @Binding var coordinate: CLLocationCoordinate2D?
     @State private var region: MKCoordinateRegion
     @State private var selectedLocation: CLLocationCoordinate2D?
+    @Environment(\.dismiss) var dismiss
 
     init(coordinate: Binding<CLLocationCoordinate2D?>) {
         self._coordinate = coordinate
@@ -21,37 +22,87 @@ struct MapView: View {
             center: coordinate.wrappedValue ?? defaultCoordinate,
             span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
         ))
-        self._selectedLocation = State(initialValue: coordinate.wrappedValue)
+        self._selectedLocation = State(initialValue: coordinate.wrappedValue ?? defaultCoordinate)
     }
 
     var body: some View {
-        VStack {
-            Map(coordinateRegion: $region, annotationItems: selectedLocation != nil ? [MapMarker(coordinate: selectedLocation!)] : []) { item in
-                MapPin(coordinate: item.coordinate, tint: AppColors.primary)
-            }
-            .frame(height: 300)
-            .cornerRadius(AppConstants.cornerRadius)
-            .onTapGesture {
-                // يمكن تطوير هذا لإضافة Tap Gesture لتحديد الموقع
-            }
-
-            if selectedLocation != nil {
-                HStack {
-                    Text("الإحداثيات:")
-                        .font(.caption)
+        VStack(spacing: ResponsiveLayout.baseSpacing) {
+            // Header
+            HStack {
+                Text("موقع المنزل")
+                    .font(.system(size: 24, weight: .bold))
+                    .foregroundColor(AppColors.textPrimary)
+                
+                Spacer()
+                
+                Button(action: {
+                    dismiss()
+                }) {
+                    Text("إغلاق")
+                        .font(.system(size: 16))
                         .foregroundColor(AppColors.textSecondary)
-                    Text(String(format: "%.4f, %.4f", selectedLocation!.latitude, selectedLocation!.longitude))
-                        .font(.caption)
-                        .fontWeight(.medium)
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 8)
+                        .background(Color(UIColor.systemGray5))
+                        .cornerRadius(8)
                 }
-                .padding(.top, 8)
+            }
+            .padding(.horizontal)
+            .padding(.top)
+            
+            // Map with center pin
+            ZStack {
+                Map(coordinateRegion: $region)
+                    .frame(height: 400)
+                    .cornerRadius(AppConstants.cornerRadius)
+                    .gesture(
+                        DragGesture()
+                            .onChanged { _ in
+                                selectedLocation = region.center
+                            }
+                    )
+                    .simultaneousGesture(
+                        MagnificationGesture()
+                            .onChanged { _ in
+                                selectedLocation = region.center
+                            }
+                    )
+                
+                // Center pin that stays in the middle
+                Image(systemName: "mappin.circle.fill")
+                    .font(.system(size: 50))
+                    .foregroundColor(AppColors.primary)
+                    .shadow(color: .black.opacity(0.3), radius: 3, x: 0, y: 2)
+            }
+            .padding(.horizontal)
+            .onAppear {
+                selectedLocation = region.center
             }
 
+            // Coordinates display
+            if let location = selectedLocation {
+                HStack(spacing: 8) {
+                    Image(systemName: "location.fill")
+                        .foregroundColor(AppColors.primary)
+                    Text("الإحداثيات:")
+                        .font(.system(size: 14))
+                        .foregroundColor(AppColors.textSecondary)
+                    Text(String(format: "%.4f, %.4f", location.latitude, location.longitude))
+                        .font(.system(size: 14, weight: .medium))
+                        .foregroundColor(AppColors.textPrimary)
+                }
+                .padding(.horizontal)
+            }
+
+            // Confirm button
             CustomButton(title: "تأكيد الموقع") {
                 coordinate = selectedLocation
+                dismiss()
             }
-            .padding(.top)
+            .padding(.horizontal)
+            .padding(.bottom)
         }
+        .background(Color(UIColor.systemBackground))
     }
 }
 

@@ -90,8 +90,8 @@ extension InvestmentOpportunity {
     static var mockData: [InvestmentOpportunity] {
         return [
             InvestmentOpportunity(
-                title: LocalizedStrings.get("opportunity.riyadh"),
-                location: LocalizedStrings.get("opportunity.riyadhLocation"),
+                title: LocalizedStrings.get("opportunity.logisticsPark"),
+                location: LocalizedStrings.get("opportunity.logisticsParkLocation"),
                 type: .industrial,
                 imageName: "construction_site",
                 returnRate: 8.66,
@@ -101,9 +101,9 @@ extension InvestmentOpportunity {
                 targetAmount: 40.0
             ),
             InvestmentOpportunity(
-                title: LocalizedStrings.get("opportunity.jeddah"),
-                location: LocalizedStrings.get("opportunity.jeddahLocation"),
-                type: .residential,
+                title: LocalizedStrings.get("opportunity.riyadhFront"),
+                location: LocalizedStrings.get("opportunity.riyadhFrontLocation"),
+                type: .commercial,
                 imageName: "jeddah_aerial",
                 returnRate: 6.2,
                 yieldRate: 5.27,
@@ -112,20 +112,9 @@ extension InvestmentOpportunity {
                 targetAmount: 25.0
             ),
             InvestmentOpportunity(
-                title: LocalizedStrings.get("opportunity.dubai"),
-                location: LocalizedStrings.get("opportunity.dubaiLocation"),
-                type: .commercial,
-                imageName: "dubai_offices",
-                returnRate: 7.1,
-                yieldRate: 6.03,
-                minInvestment: 2000,
-                fundedPercentage: 12,
-                targetAmount: 60.0
-            ),
-            InvestmentOpportunity(
-                title: LocalizedStrings.get("opportunity.dammam"),
-                location: LocalizedStrings.get("opportunity.dammamLocation"),
-                type: .industrial,
+                title: LocalizedStrings.get("opportunity.laysenValley"),
+                location: LocalizedStrings.get("opportunity.laysenValleyLocation"),
+                type: .residential,
                 imageName: "warehouse_industrial",
                 returnRate: 9.15,
                 yieldRate: 7.78,

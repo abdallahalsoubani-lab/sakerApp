@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct AppColors {
-    static let primary = Color(hex: "#006C35")
-    static let secondary = Color(hex: "#1E8E5A")
-    static let background = Color(hex: "#F8F9FA")
-    static let textPrimary = Color(hex: "#212529")
-    static let textSecondary = Color(hex: "#6C757D")
+    static let primary = Color(hex: "#D4AF37")
+    static let secondary = Color(hex: "#B8941E")
+    static let background = Color(UIColor.systemGroupedBackground)
+    static let textPrimary = Color.primary
+    static let textSecondary = Color.secondary
     static let error = Color(hex: "#DC3545")
     static let success = Color(hex: "#28A745")
-    static let cardBackground = Color.white
+    static let cardBackground = Color(UIColor.systemBackground)
 }
 
 struct AppConstants {

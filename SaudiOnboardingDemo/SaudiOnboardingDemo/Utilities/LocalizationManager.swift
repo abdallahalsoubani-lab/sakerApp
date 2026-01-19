@@ -134,7 +134,7 @@ struct LocalizedStrings {
         "detail.current": [.english: "CURRENT", .arabic: "الحالي"],
         
         // MARK: - Timeline Items
-        "timeline.fundraising": [.english: "Fundraising Period", .arabic: "فترة جمع التبرعات"],
+        "timeline.fundraising": [.english: "Fundraising Period", .arabic: "فترة جمع المستثمرين"],
         "timeline.fundraisingDesc": [.english: "Initial capital raising phase.", .arabic: "مرحلة جمع رأس المال الأولي."],
         "timeline.acquisition": [.english: "Property Acquisition", .arabic: "اقتناء العقار"],
         "timeline.acquisitionDesc": [.english: "Asset transfer and registration.", .arabic: "نقل الأصول والتسجيل."],
@@ -200,14 +200,14 @@ struct LocalizedStrings {
         "profile.logout": [.english: "Log Out", .arabic: "تسجيل الخروج"],
         
         // MARK: - Investment Opportunities Mock Data
-        "opportunity.riyadh": [.english: "Riyadh Logistics Center 04", .arabic: "مركز الرياض للخدمات اللوجستية ٠٤"],
-        "opportunity.riyadhLocation": [.english: "Industrial Zone 2, Riyadh", .arabic: "المنطقة الصناعية ٢، الرياض"],
-        "opportunity.jeddah": [.english: "Jeddah Corniche Heights", .arabic: "مرتفعات كورنيش جدة"],
-        "opportunity.jeddahLocation": [.english: "North Corniche, Jeddah", .arabic: "الكورنيش الشمالي، جدة"],
-        "opportunity.dubai": [.english: "Downtown Dubai Offices", .arabic: "مكاتب وسط دبي"],
-        "opportunity.dubaiLocation": [.english: "Business Bay, Dubai", .arabic: "الخليج التجاري، دبي"],
-        "opportunity.dammam": [.english: "Dammam Warehousing Complex", .arabic: "مجمع مستودعات الدمام"],
-        "opportunity.dammamLocation": [.english: "Dammam Port, KSA", .arabic: "ميناء الدمام، السعودية"],
+        "opportunity.logisticsPark": [.english: "LAYSEN Valley", .arabic: "ليسن فالي"],
+        "opportunity.logisticsParkLocation": [.english: "Riyadh", .arabic: "الرياض"],
+        "opportunity.riyadhFront": [.english: "the business gate", .arabic: "البوابة الاقتصادية"],
+        "opportunity.riyadhFrontLocation": [.english: "Riyadh", .arabic: "الرياض"],
+        "opportunity.theZone": [.english: "RIYADH FRONT", .arabic: "واجهة الرياض"],
+        "opportunity.theZoneLocation": [.english: "Riyadh", .arabic: "الرياض"],
+        "opportunity.laysenValley": [.english: "Tha Zone", .arabic: "ذا زون"],
+        "opportunity.laysenValleyLocation": [.english: "Riyadh", .arabic: "الرياض"],
         
         // MARK: - Company Info
         "company.archCapital": [.english: "Arch Capital", .arabic: "آرش كابيتال"],
@@ -221,6 +221,12 @@ struct LocalizedStrings {
         "theme.dark": [.english: "Dark", .arabic: "داكن"],
         "theme.system": [.english: "System", .arabic: "النظام"],
         "theme.title": [.english: "Appearance", .arabic: "المظهر"],
+        
+        // MARK: - Splash Screen
+        "splash.welcome": [.english: "Welcome", .arabic: "مرحباً"],
+        "splash.subtitle": [.english: "Start your investment journey", .arabic: "ابدأ رحلتك الاستثمارية"],
+        "splash.register": [.english: "Create Account", .arabic: "إنشاء حساب"],
+        "splash.explore": [.english: "Explore Investments", .arabic: "استكشف الفرص"],
         
         // MARK: - My Investments Screen
         "myInvestments.title": [.english: "My Investments", .arabic: "استثماراتي"],

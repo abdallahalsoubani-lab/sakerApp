@@ -176,10 +176,10 @@ struct Step2_IDScanOCRView: View {
         }
         .background(AppColors.background.ignoresSafeArea())
         .sheet(isPresented: $showIdCamera) {
-            ImagePicker(image: $registrationData.idImage, sourceType: .camera)
+            ImagePicker(image: $registrationData.idImage, sourceType: .camera, cameraType: .idCard)
         }
         .sheet(isPresented: $showFaceCamera) {
-            ImagePicker(image: $registrationData.faceImage, sourceType: .camera)
+            ImagePicker(image: $registrationData.faceImage, sourceType: .camera, cameraType: .face)
                 .onDisappear {
                     if registrationData.faceImage != nil {
                         performFaceMatch()

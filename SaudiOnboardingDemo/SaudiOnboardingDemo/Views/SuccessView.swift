@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SuccessView: View {
     @EnvironmentObject var registrationData: RegistrationData
+    @EnvironmentObject var navigationManager: NavigationManager
 
     var body: some View {
         ScrollView {
@@ -40,7 +41,7 @@ struct SuccessView: View {
                     Divider()
 
                     SummarySection(title: "معلومات الاتصال") {
-                        SummaryRow(label: "رقم الجوال", value: registrationData.phoneNumber)
+                        SummaryRow(label: "رقم الجوال", value: "\(registrationData.selectedCountry.dialCode) \(registrationData.phoneNumber)")
                         SummaryRow(label: "البريد الإلكتروني", value: registrationData.email)
                     }
 
@@ -80,8 +81,9 @@ struct SuccessView: View {
 
                 Spacer()
 
-                CustomButton(title: "إنهاء") {
+                CustomButton(title: "إنهاء والعودة للرئيسية") {
                     registrationData.reset()
+                    navigationManager.returnToLaunchScreen()
                 }
                 .padding(.top)
             }

@@ -11,6 +11,7 @@ import CoreLocation
 
 class RegistrationData: ObservableObject {
     // Step 0 - Phone & OTP
+    @Published var selectedCountry: Country = Country.saudiArabia
     @Published var phoneNumber: String = ""
     @Published var otp: String = ""
     @Published var generatedOtp: String = ""

@@ -34,7 +34,9 @@ struct OpportunityCard: View {
             Image(opportunity.imageName)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .frame(height: 180)
+                .frame(height: 200)
+                .frame(maxWidth: .infinity)
+                .background(Color(UIColor.systemGray6))
                 .clipped()
                 .overlay(
                     LinearGradient(
@@ -97,7 +99,7 @@ struct OpportunityCard: View {
             }
             .padding(16)
         }
-        .frame(height: 180)
+        .frame(height: 200)
         .cornerRadius(20, corners: [.topLeft, .topRight])
     }
     

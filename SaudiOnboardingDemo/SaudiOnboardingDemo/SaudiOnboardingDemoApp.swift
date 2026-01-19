@@ -77,15 +77,82 @@ struct OpportunitiesViewContent: View {
     @StateObject private var viewModel = OpportunitiesViewModel()
     @Binding var hideTabBar: Bool
     private let gutter: CGFloat = 20
+
+    // Scroll tracking
+    @State private var scrollMinY: CGFloat = 0
+
+    // Tuning
+    private let headerCollapseDistance: CGFloat = 120
+    private let searchCollapseDistance: CGFloat = 80
+
+    private var scrollY: CGFloat { max(0, -scrollMinY) }
+
+    private var headerProgress: CGFloat {
+        min(scrollY / headerCollapseDistance, 1)
+    }
+
+    private var searchProgress: CGFloat {
+        min(scrollY / searchCollapseDistance, 1)
+    }
+
+    private var headerHidden: Bool { headerProgress >= 1 }
+    private var searchHidden: Bool { searchProgress >= 1 }
     
     var body: some View {
-        VStack(spacing: 0) {
-            headerSection
-            searchBarSection
-            filterSection
-            opportunitiesListSection
+        ZStack(alignment: .top) {
+            ScrollView(showsIndicators: false) {
+                LazyVStack(spacing: 0, pinnedViews: [.sectionHeaders]) {
+                    Color.clear
+                        .frame(height: 1)
+                        .background(
+                            GeometryReader { geo in
+                                Color.clear.preference(
+                                    key: ScrollMinYPreferenceKey.self,
+                                    value: geo.frame(in: .named("opportunitiesScroll")).minY
+                                )
+                            }
+                        )
+
+                    // Header content that collapses & disappears
+                    VStack(spacing: 0) {
+                        headerSection
+                            .opacity(1 - headerProgress)
+
+                        // Search bar that collapses & disappears
+                        searchBarSection
+                            .opacity(1 - searchProgress)
+                            .allowsHitTesting(!searchHidden)
+                    }
+                    .background(Color.white)
+
+                    // Section with pinned filters
+                    Section {
+                        opportunitiesListContent
+                            .background(Color(UIColor.systemGroupedBackground))
+                    } header: {
+                        filterSectionPinned
+                            .background(Color.white)
+                            .compositingGroup()
+                            .zIndex(2)
+                    }
+                }
+            }
+            .background(Color(UIColor.systemGroupedBackground))
+            .coordinateSpace(name: "opportunitiesScroll")
+            .onPreferenceChange(ScrollMinYPreferenceKey.self) { value in
+                scrollMinY = value
+            }
+
+            // Solid white cover for the top safe area above the pinned filter
+            GeometryReader { proxy in
+                Color.white
+                    .frame(height: proxy.safeAreaInsets.top)
+                    .frame(maxWidth: .infinity)
+                    .ignoresSafeArea(edges: .top)
+                    .allowsHitTesting(false)
+            }
+            .frame(height: 0)
         }
-        .background(Color(UIColor.systemGroupedBackground))
         .navigationBarHidden(true)
     }
     
@@ -134,46 +201,66 @@ struct OpportunitiesViewContent: View {
         .background(Color(UIColor.systemBackground))
     }
     
-    private var filterSection: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 12) {
-                ForEach(PropertyType.allCases) { type in
-                    FilterButton(
-                        title: type.displayName,
-                        isSelected: viewModel.selectedFilter == type
-                    ) {
-                        withAnimation(.easeInOut(duration: 0.2)) {
-                            viewModel.selectFilter(type)
+    private var filterSectionPinned: some View {
+        ZStack {
+            // Solid white background to fully cover content behind
+            Color.white
+                .frame(maxWidth: .infinity, minHeight: 56)
+
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 12) {
+                    ForEach(PropertyType.allCases) { type in
+                        FilterButton(
+                            title: type.displayName,
+                            isSelected: viewModel.selectedFilter == type
+                        ) {
+                            withAnimation(.easeInOut(duration: 0.2)) {
+                                viewModel.selectFilter(type)
+                            }
                         }
                     }
                 }
+                .padding(.horizontal, gutter)
             }
-            .padding(.horizontal, gutter)
+            .padding(.vertical, 12)
         }
-        .padding(.vertical, 16)
-        .background(Color(UIColor.systemBackground))
+        .frame(maxWidth: .infinity)
+        .background(Color.white)
+        .compositingGroup()
+        .overlay(
+            Rectangle()
+                .fill(Color.gray.opacity(0.2))
+                .frame(height: 0.5),
+            alignment: .bottom
+        )
+        .shadow(color: Color.black.opacity(0.05), radius: 4, x: 0, y: 2)
     }
     
-    private var opportunitiesListSection: some View {
-        ScrollView(showsIndicators: false) {
-            LazyVStack(spacing: 20) {
-                ForEach(viewModel.filteredOpportunities) { opportunity in
-                    NavigationLink(
-                        destination: OpportunityDetailView(opportunity: opportunity, hideTabBar: $hideTabBar)
-                    ) {
-                        OpportunityCard(opportunity: opportunity)
-                    }
-                    .buttonStyle(.plain)
-                    .simultaneousGesture(TapGesture().onEnded {
-                        withAnimation {
-                            hideTabBar = true
-                        }
-                    })
+    private var opportunitiesListContent: some View {
+        LazyVStack(spacing: 20) {
+            ForEach(viewModel.filteredOpportunities) { opportunity in
+                NavigationLink(
+                    destination: OpportunityDetailView(opportunity: opportunity, hideTabBar: $hideTabBar)
+                ) {
+                    OpportunityCard(opportunity: opportunity)
                 }
+                .buttonStyle(.plain)
+                .padding(.horizontal, gutter)
+                .simultaneousGesture(TapGesture().onEnded {
+                    withAnimation {
+                        hideTabBar = true
+                    }
+                })
             }
-            .padding(.horizontal, gutter)
-            .padding(.vertical, 20)
         }
+        .padding(.vertical, 20)
+    }
+}
+
+private struct ScrollMinYPreferenceKey: PreferenceKey {
+    static var defaultValue: CGFloat = 0
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+        value = nextValue()
     }
 }
 
@@ -684,7 +771,7 @@ struct ProfilePlaceholderView: View {
             .padding(16)
             .background(
                 LinearGradient(
-                    colors: themeManager.currentTheme == .dark ? 
+                    colors: themeManager.currentTheme == .dark ?
                         [Color(red: 0.2, green: 0.2, blue: 0.3), Color(red: 0.1, green: 0.1, blue: 0.2)] :
                         [Color(red: 0.3, green: 0.5, blue: 0.9), Color(red: 0.2, green: 0.4, blue: 0.8)],
                     startPoint: .topLeading,

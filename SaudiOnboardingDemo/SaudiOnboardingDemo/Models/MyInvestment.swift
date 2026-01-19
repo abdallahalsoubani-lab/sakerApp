@@ -54,8 +54,8 @@ extension MyInvestment {
     static var mockData: [MyInvestment] {
         return [
             MyInvestment(
-                title: LocalizedStrings.get("opportunity.riyadh"),
-                location: LocalizedStrings.get("opportunity.riyadhLocation"),
+                title: LocalizedStrings.get("opportunity.logisticsPark"),
+                location: LocalizedStrings.get("opportunity.logisticsParkLocation"),
                 imageName: "construction_site",
                 investedAmount: 100000,
                 currentValue: 175000,
@@ -65,8 +65,8 @@ extension MyInvestment {
                 duration: LocalizedStrings.get("myInvestments.months")
             ),
             MyInvestment(
-                title: LocalizedStrings.get("opportunity.jeddah"),
-                location: LocalizedStrings.get("opportunity.jeddahLocation"),
+                title: LocalizedStrings.get("opportunity.riyadhFront"),
+                location: LocalizedStrings.get("opportunity.riyadhFrontLocation"),
                 imageName: "jeddah_aerial",
                 investedAmount: 150000,
                 currentValue: 252375,
