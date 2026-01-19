@@ -123,7 +123,7 @@ struct OpportunitiesViewContent: View {
                             .opacity(1 - searchProgress)
                             .allowsHitTesting(!searchHidden)
                     }
-                    .background(Color.white)
+                    .background(Color(UIColor.systemBackground))
 
                     // Section with pinned filters
                     Section {
@@ -131,7 +131,7 @@ struct OpportunitiesViewContent: View {
                             .background(Color(UIColor.systemGroupedBackground))
                     } header: {
                         filterSectionPinned
-                            .background(Color.white)
+                            .background(Color(UIColor.systemBackground))
                             .compositingGroup()
                             .zIndex(2)
                     }
@@ -145,7 +145,7 @@ struct OpportunitiesViewContent: View {
 
             // Solid white cover for the top safe area above the pinned filter
             GeometryReader { proxy in
-                Color.white
+                Color(UIColor.systemBackground)
                     .frame(height: proxy.safeAreaInsets.top)
                     .frame(maxWidth: .infinity)
                     .ignoresSafeArea(edges: .top)
@@ -204,7 +204,7 @@ struct OpportunitiesViewContent: View {
     private var filterSectionPinned: some View {
         ZStack {
             // Solid white background to fully cover content behind
-            Color.white
+            Color(UIColor.systemBackground)
                 .frame(maxWidth: .infinity, minHeight: 56)
 
             ScrollView(.horizontal, showsIndicators: false) {
@@ -225,7 +225,7 @@ struct OpportunitiesViewContent: View {
             .padding(.vertical, 12)
         }
         .frame(maxWidth: .infinity)
-        .background(Color.white)
+        .background(Color(UIColor.systemBackground))
         .compositingGroup()
         .overlay(
             Rectangle()

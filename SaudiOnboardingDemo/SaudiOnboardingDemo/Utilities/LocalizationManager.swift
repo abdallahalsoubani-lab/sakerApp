@@ -134,7 +134,7 @@ struct LocalizedStrings {
         "detail.current": [.english: "CURRENT", .arabic: "الحالي"],
         
         // MARK: - Timeline Items
-        "timeline.fundraising": [.english: "Fundraising Period", .arabic: "فترة جمع المستثمرين"],
+        "timeline.fundraising": [.english: "nvestor fundraising period", .arabic: "فترة جمع المستثمرين"],
         "timeline.fundraisingDesc": [.english: "Initial capital raising phase.", .arabic: "مرحلة جمع رأس المال الأولي."],
         "timeline.acquisition": [.english: "Property Acquisition", .arabic: "اقتناء العقار"],
         "timeline.acquisitionDesc": [.english: "Asset transfer and registration.", .arabic: "نقل الأصول والتسجيل."],
